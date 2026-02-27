@@ -1,36 +1,36 @@
-# Cardiology Chapter Review  
-National Neonatal Guidelines – Structured Technical Review  
-Reviewer: Shakti Pillay 
-Date: October 2025-
+# Chapter 10 – Cardiology  
+Structured Technical Review  
+Lead Reviewer: Dr Shakti Pillay  
+Date Reviewed: 1 January 2026  
 
 ---
 
-## Review Scope
+## 1. Executive Summary
 
-This review assessed:
+This chapter contains strong clinical content but requires structural reorganisation, clarification of escalation thresholds, and strengthened governance language to improve safety and feasibility within the South African context.
 
-- Structural clarity  
-- Clinical safety  
-- Governance alignment  
-- Feasibility in South African district and regional settings  
-- Medico-legal defensibility  
-- Internal consistency and formatting  
+Key priorities:
+- Reorder sections logically
+- Clarify prostaglandin hierarchy
+- Simplify hyperoxia test interpretation
+- Strengthen referral triggers
+- Standardise units and formatting
 
 ---
 
-## Major Structural Comments
+## 2. Structural Review
 
-### 1. Section Order
+### 2.1 Section Order
 
-**Issue:** Pulse oximetry screening precedes cardiovascular examination.
+**Issue:** Pulse oximetry screening precedes structured cardiovascular examination.
 
-**Risk:** Screening without structured clinical assessment may weaken clinical reasoning.
+**Risk:** Screening without systematic assessment may weaken clinical reasoning.
 
-**Recommendation:** Reorder as:
+**Recommendation:** Reorder sections as:
 
-1. Cardiovascular Assessment  
+1. Cardiovascular Assessment (History + Examination)  
 2. Cyanosis  
-3. Murmur  
+3. Heart Murmur  
 4. Pulse Oximetry Screening  
 5. Hyperoxia Test  
 6. Abnormal Heart Rate  
@@ -38,52 +38,77 @@ This review assessed:
 
 ---
 
-## Clinical Safety Flags
+### 2.2 Duplication
 
-### Prostaglandin Administration
+Repeated referral language and overlapping escalation statements should be consolidated.
 
-**Issue:** Oral prostaglandin listed without IV hierarchy.
+---
 
-**Risk:** Misinterpretation in unstable neonates.
+## 3. Clinical Safety Review
+
+### 3.1 Prostaglandin Administration
+
+**Issue:** Oral prostaglandin referenced without IV hierarchy.
 
 **Recommendation:**  
-IV Prostaglandin E1 must be first-line.  
-Oral PGE2 may only be used if IV access is unavailable and urgent transfer is being arranged.
+IV Prostaglandin E1 must be first-line in suspected duct-dependent lesions.  
+Oral PGE2 may only be used if IV access unavailable and urgent transfer initiated.
 
 ---
 
-### Hyperoxia Test Interpretation
+### 3.2 Hyperoxia Test
 
-**Issue:** PaO2 thresholds overly academic.
+**Issue:** Thresholds overly academic and potentially unsafe for district use.
 
-**Recommendation:** Simplify operational thresholds for district-level safety.
+**Recommendation:** Simplify to operational interpretation:
 
----
-
-## Governance Improvements
-
-- Explicit referral triggers required.
-- Documented referral pathways should be mandated.
-- Inotrope initiation should be limited to monitored settings.
+- PaO2 >150 mmHg → Likely pulmonary  
+- PaO2 <100 mmHg → Suspect congenital heart disease  
+- Clinically unstable → Refer urgently regardless of test result  
 
 ---
 
-## Feasibility Considerations (South African Context)
+## 4. Governance Strengthening
 
-- Echocardiography not universally available.
-- Four-limb BP measurement may be equipment-limited.
-- Monitoring capacity varies between facilities.
-
----
-
-## Formatting and Consistency
-
-- Standardise units (mL, mmHg, mcg).
-- Remove repetitive referral language.
-- Harmonise table heading style.
+- Mandatory documented referral pathways required.  
+- Inotrope use restricted to monitored settings.  
+- Clear escalation triggers required for:
+  - Persistent cyanosis  
+  - Pathological murmur  
+  - Shock  
+  - Abnormal four-limb BP  
 
 ---
 
-## Summary
+## 5. Feasibility – South African Context
 
-The chapter contains strong clinical content but requires structural harmonisation and strengthened governance language prior to publication.
+- Echocardiography not universally available.  
+- Four-limb BP cuffs not always available.  
+- Monitoring capacity varies between district and regional hospitals.  
+
+Guideline must reflect these realities explicitly.
+
+---
+
+## 6. Formatting and Terminology
+
+Standardise:
+
+- mL  
+- mmHg  
+- kPa  
+- mcg  
+
+Remove repetitive referral statements.
+
+---
+
+## 7. Required Actions Before Finalisation
+
+- Structural reordering  
+- Hyperoxia simplification  
+- Governance reinforcement  
+- Unit harmonisation  
+- Algorithm redesign  
+
+---
