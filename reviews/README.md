@@ -4,7 +4,7 @@
 Neonatologist
 University of Cape Town  
 
-**Review Commenced:** 30 October 2025
+**Review Commenced:** 2025- Current
 
 ---
 
@@ -23,6 +23,8 @@ The purpose of this review process is to:
 ---
 
 ## Review Framework
+
+All national reviewer comments were consolidated into structured review logs and assessed against clinical safety, governance clarity, feasibility across levels of care, and national implementation standards. The revised chapters reflect this systematic harmonisation process.
 
 Each chapter is reviewed using a structured approach:
 
