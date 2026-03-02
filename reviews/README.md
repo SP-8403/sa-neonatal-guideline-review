@@ -18,9 +18,15 @@ The purpose of this review process is to:
 - Standardise terminology and formatting  
 - Enhance governance and referral clarity  
 - Reduce medico-legal ambiguity  
-- Support consistent implementation across levels of care  
+- Support consistent implementation across levels of care
+- Visual and Implementation Deliverables (Paid Assets + Redrawn Diagrams)
+- ****Licensed visual assets** were obtained through paid image licensing to support guideline-quality figures and ensure appropriate usage rights.
+- **Diagrams and algorithms were redrawn and standardised** using a reproducible diagramming approach (Mermaid), enabling:
+  - consistent styling across chapters,
+  - straight-line clinical pathways,
+  - clean SVG export for print/PDF,
+  - version-controlled updates aligned wi**th national governance needs.
 
----
 
 ## Review Framework
 
