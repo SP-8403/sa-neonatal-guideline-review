@@ -47,7 +47,7 @@ This process reflects structured clinical oversight and technical refinement.
 
 ## Chapter Reviews
 
-- [Cardiology](reviews/cardiology/review.md)
+- [Cardiology](cardiology/review.md)
 
 (Additional chapters will be added progressively.)
 
