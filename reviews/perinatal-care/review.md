@@ -107,8 +107,6 @@ These visual tools support practical implementation of the guideline in clinical
 
 ### Visual Assets and Licensing
 
-Where appropriate, visual assets and diagram components used to construct guideline algorithms were obtained through licensed resources to ensure compliance with copyright and publication standards.
-
-Licensing costs for certain graphical assets used in the development of standardised clinical diagrams were personally covered by the reviewer to support the production of clear, high-quality guideline figures suitable for national publication.
-
-All diagrams were subsequently standardised and rendered into reproducible formats to support consistent presentation across chapters and compatibility with print and digital guideline formats.
+- Where appropriate, visual assets and diagram components used to construct guideline algorithms were obtained through licensed resources to ensure compliance with copyright and publication standards.
+- Licensing costs for certain graphical assets used in the development of standardised clinical diagrams were  covered by the reviewer to support the production of clear, high-quality guideline figures   suitable for national publication.
+- All diagrams were subsequently standardised and rendered into reproducible formats to support consistent presentation across chapters and compatibility with print and digital guideline formats.
