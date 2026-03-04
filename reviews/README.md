@@ -47,6 +47,7 @@ This process reflects structured clinical oversight and technical refinement.
 
 ## Chapter Reviews
 
+-[Perinatal Care](perinatal-care/review.md)
 - [Cardiology](cardiology/review.md)
 
 (Additional chapters will be added progressively.)
