@@ -1,5 +1,3 @@
-![Banner](banner.png)
-
 # South African Neonatal Guidelines – Technical Review and Harmonisation
 
 **Technical Reviewer and Editorial Lead**  
