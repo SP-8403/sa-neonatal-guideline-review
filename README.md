@@ -19,6 +19,6 @@ Review Period: 2025 – Current
 
 The structured technical review of draft guideline chapters is documented here:
 
-➡️ **[View the Review Documentation](reviews/)**
+**[View the Review Documentation](reviews/)**
 
 This includes chapter-by-chapter technical review summaries, synthesis of reviewer comments, and editorial harmonisation work undertaken following national consultation.
