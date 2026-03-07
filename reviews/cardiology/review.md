@@ -1,4 +1,4 @@
-# Chapter 10 – Cardiology  
+# Chapter – Cardiology  
 **Structured Technical Review**  
 Lead Reviewer: Dr Shakti Pillay  
 Date Reviewed: 1 January 2026  
