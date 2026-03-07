@@ -89,10 +89,9 @@ Each chapter is reviewed using the following structured framework:
 
 The following chapter reviews are currently documented:
 
-- [Perinatal Care](reviews/perinatal-care/review.md)  
-- [Cardiology](reviews/cardiology/review.md)  
-- [Respiratory Conditions](reviews/respiratory/review.md)
-
+- [Perinatal Care – Technical Review](reviews/perinatal-care/review.md)
+- [Cardiology – Technical Review](reviews/cardiology/review.md)
+- [Respiratory Conditions – Technical Review](reviews/respiratory/review.md)
 
 ---
 
