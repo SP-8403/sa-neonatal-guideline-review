@@ -79,13 +79,17 @@ Where appropriate, wording was revised to ensure consistency with current clinic
 
 ## Summary of Editorial Changes
 
-Following synthesis of reviewer feedback, the chapter was revised to:
+Following synthesis of reviewer feedback, the revisions included:
 
-- clarify definitions of neonatal apnoea
-- improve the structure of respiratory distress assessment
-- standardise terminology across respiratory conditions
-- strengthen referral and escalation guidance
-- reorganise respiratory support instructions
-- simplify procedural descriptions.
+- Clarifying and standardising the definitions of apnoea of prematurity, periodic breathing, and central, obstructive, and mixed apnoea
+- Standardising respiratory terminology across the chapter to improve consistency
+- Adding and refining substantive content on neonatal apnoea, including causes, classification, assessment, management, caffeine use, and discontinuation
+- Restructuring dense narrative text into clearer, stepwise clinical guidance
+- Improving the formatting, layout, and visual organisation of tables and management sections to support rapid bedside use
+- Implifying procedural descriptions and making the chapter easier for frontline clinicians to navigate
+- Clarifying referral and escalation pathways, including when to discuss with higher levels of care and when to consider intubation or mechanical ventilation
+- Reorganising the CPAP and respiratory support sections into a clearer stepwise format
+- Developing clinical decision-support visuals, including Mermaid diagrams and other flow-based guidance, to improve interpretation and implementation
+- Strengthening the overall formatting and presentation of the chapter, including layout and colour-coded visual structure, to improve readability and practical use.
 
 These revisions aim to improve the clarity, consistency, and practical usability of the respiratory chapter for clinicians working across different levels of neonatal care.
