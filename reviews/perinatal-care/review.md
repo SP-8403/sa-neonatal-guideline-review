@@ -6,6 +6,13 @@ Neonatologist – University of Cape Town
 
 ---
 
+## Access Chapter
+
+- [Open Chapter Overview](../../docs/chapter-01-perinatal-care.md)
+- [Download Full Chapter (Word)](../../docs/chapter-01-perinatal-care.docx)
+
+---
+
 ## Overview
 
 This chapter underwent structured technical review following national consultation and receipt of reviewer comments from provincial programmes, academic contributors, and frontline clinicians.
