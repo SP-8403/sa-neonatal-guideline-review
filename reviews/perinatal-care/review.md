@@ -17,96 +17,111 @@ The revised chapter reflects this editorial synthesis.
 
 ## Structural Assessment
 
-The chapter structure was revised to improve clinical flow from antenatal assessment through delivery preparation and immediate neonatal transition.
+The chapter was reorganised to align with clinical workflow and improve usability at the bedside.
 
-Key structural refinements included:
+Key structural interventions included:
+	•	Reorganisation into a clinically sequenced framework:
+	•	Antenatal assessment → Labour and delivery → Preparation → Neonatal transition → Referral
+	•	Standardisation of maternal history components
+	•	Clear separation of:
+	•	Antenatal risk factors
+	•	Intrapartum considerations
+	•	Improved integration between:
+	•	Maternal conditions and neonatal risk
 
-- clearer organisation of maternal history components
-- improved sequencing of delivery preparation and neonatal transition
-- clearer separation of antenatal risk factors and intrapartum considerations
-- improved navigation between sections addressing maternal conditions and neonatal risk.
-
-These changes improve readability and usability for clinicians across district, regional and tertiary facilities.
+These changes resulted in a more navigable, clinician-oriented structure applicable across all levels of care.
 
 ---
 
 ## Clinical Safety Review
 
-Clinical recommendations were reviewed to ensure alignment with current neonatal resuscitation practice and evidence-based guidance.
+Clinical content was reviewed and actively aligned with current neonatal practice standards.
 
-Key areas reviewed included:
+Key areas strengthened include:
+	•	Neonatal resuscitation preparation
+	•	Integration of Helping Babies Breathe (HBB) principles
+	•	Clarification of oxygen saturation targets during transition
+	•	Structured identification of perinatal risk factors for resuscitation
+	•	Standardisation of immediate newborn stabilisation guidance
 
-- Neonatal resuscitation preparation
-- Helping Babies Breathe (HBB) principles
-- Oxygen saturation targets during neonatal transition
-- Identification of perinatal risk factors for resuscitation
-- Immediate newborn stabilisation.
-
-Content was harmonised with national and international guidance to ensure clarity for clinicians working in varied resource settings.
+Content was harmonised with national and international guidance to ensure clarity across resource-variable settings.
 
 ---
 
 ## Governance and Escalation Clarity
 
-Reviewer comments highlighted the need for stronger clinical governance guidance.
+Reviewer feedback identified gaps in governance and referral clarity.
 
-The chapter was revised to strengthen:
+The chapter was substantially strengthened through:
+	•	Development of explicit referral pathways
+	•	Standardisation of documentation requirements
+	•	Clarification of:
+	•	Escalation processes
+	•	Inter-facility communication
+	•	Introduction of structured referral documentation guidance
 
-- referral pathways
-- documentation requirements
-- escalation processes
-- communication between referring and receiving facilities
-- documentation of referral discussions.
-
-These revisions improve medico-legal clarity and support safer referral practice across the health system.
+These additions significantly improve medico-legal defensibility and system-level safety.
 
 ---
 
 ## Feasibility in the South African Context
 
-Recommendations were assessed against implementation feasibility across different levels of care.
+All recommendations were reviewed for contextual applicability across levels of care, including:
+	•	Midwife Obstetric Units (MOUs)
+	•	District hospitals
+	•	Regional centres
+	•	Tertiary neonatal units
 
-Where appropriate, language was clarified to ensure that guidance can be applied in:
-
-- Midwife Obstetric Units (MOUs)
-- district hospitals
-- regional referral centres
-- tertiary neonatal units
-
-This ensures the chapter remains applicable across the South African healthcare system.
+Language and recommendations were refined to ensure practical implementation within resource-variable environments, without compromising clinical standards.
 
 ---
 
 ## Editorial Harmonisation of Reviewer Comments
 
-All national reviewer comments were reviewed and integrated during the editorial process.
+All national reviewer comments were:
+	•	Reviewed in full
+	•	Categorised into thematic domains
+	•	Synthesised into a unified editorial revision
 
-Comments were categorised into:
+Comment domains included:
+	•	Clinical clarification
+	•	Structural refinement
+	•	Governance and documentation
+	•	Terminology standardisation
 
-- clinical clarification
-- structural improvements
-- governance and documentation guidance
-- terminology and editorial corrections.
-
-Duplicate and overlapping comments were consolidated before incorporation to ensure coherence across the chapter.
+Duplicate and overlapping comments were consolidated prior to integration, ensuring internal consistency across the chapter.
 
 ---
 
 ## Diagrams and Algorithms
 
-Clinical diagrams and algorithms within the chapter were redrawn and standardised to improve clarity and usability.
+Clinical diagrams and algorithms were:
+	•	Redrawn and standardised
+	•	Aligned with clinical decision-making pathways
 
-Where necessary, diagrams were commissioned and developed to ensure:
+Designed for:
+	•	Clarity
+	•	Reproducibility
+	•	Consistency across chapters
 
-- consistent styling across chapters
-- clear clinical pathways
-- reproducible diagram generation
-- compatibility with guideline publication formats.
+Where required, diagrams were newly developed to support structured implementation of guideline recommendations.
 
-These visual tools support practical implementation of the guideline in clinical settings.
+⸻
 
 ### Visual Assets and Licensing
 
-- Where appropriate, visual assets and diagram components used to construct guideline algorithms were obtained through licensed resources to ensure compliance with copyright and publication standards.
-- Licensing costs for certain graphical assets used in the development of standardised clinical diagrams were  covered by the reviewer to support the production of clear, high-quality guideline figures   suitable for national publication.
-- All diagrams were subsequently standardised and rendered into reproducible formats to support consistent presentation across chapters and compatibility with print and digital guideline formats.
+Visual and graphical components used in algorithm development were sourced through licensed resources to ensure compliance with copyright and publication standards.
+
+Where applicable:
+	•	Licensing costs for graphical assets were independently supported by the reviewer
+	•	All diagrams were standardised into reproducible formats
+
+Outputs were optimised for:
+	•	National publication
+	•	Print and digital formats
+  Implementation feasibility across all levels of care within the South African health system
+
+
+The final chapter reflects structured editorial harmonisation rather than isolated comment resolution.
+
+⸻
