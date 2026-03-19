@@ -12,10 +12,9 @@ It includes:
 - Contextual adaptation for South African levels of care
 
 ---
+## 📥 Access Full Chapter
 
-## Access Full Chapter
-
-[⬇️ Download Chapter 1 (Word Version)](./chapter-01-perinatal-care.docx)
+[Download Chapter 1 (Word)](chapter-01-perinatal-care.docx)
 
 ---
 
