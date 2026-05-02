@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Evaluation and Management of Cyanosis in the Newborn</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+  --green: #2C5440;
+  --green-dark: #063f22;
+  --green-deep: #003d20;
+  --green-pale: #E8F3EF;
+  --cream: #FFFBEA;
+  --cream-border: #D8D1A6;
+  --red: #D50000;
+  --red-soft: #FFF5F5;
+  --line: #93A59A;
+  --text: #081728;
+  --muted: #3B4856;
+  --box: #FFFFFF;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f2f4f3;
+  font-family: "Source Sans 3", "Source Sans Pro", Arial, sans-serif;
+  color: var(--text);
+}
+
+.toolbar {
+  width: 100%;
+  padding: 12px 18px;
+  background: #10251c;
+  color: white;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+}
+
+.toolbar button {
+  background: white;
+  color: #10251c;
+  border: 0;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-weight: 800;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.toolbar span {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.page {
+  width: 1600px;
+  height: 1067px;
+  margin: 24px auto;
+  background: white;
+  border: 1px solid #8CA89B;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.16);
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  height: 954px;
+  padding: 4px 8px 0 8px;
+}
+
+.column {
+  border: 1.5px solid #8EA79A;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #FBFCFC;
+  position: relative;
+}
+
+.col-header {
+  background: linear-gradient(#004523, #003719);
+  color: white;
+  text-align: center;
+  padding: 14px 10px 13px 10px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  line-height: 1.05;
+  font-size: 28px;
+}
+
+.col-header .small {
+  display: block;
+  font-size: 28px;
+}
+
+.content {
+  padding: 12px 10px 8px 10px;
+}
+
+.step-title {
+  background: var(--cream);
+  border: 1.4px solid var(--cream-border);
+  border-radius: 8px;
+  text-align: center;
+  color: #0C2D1D;
+  font-weight: 900;
+  font-size: 21px;
+  padding: 7px 10px;
+  margin-bottom: 12px;
+}
+
+.type-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.type-card {
+  border: 1.5px solid #7FA28E;
+  border-radius: 8px;
+  background: white;
+  min-height: 272px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.type-card h3 {
+  margin: 0;
+  background: linear-gradient(#004523, #003719);
+  color: white;
+  padding: 10px 6px;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.type-card p {
+  font-size: 17px;
+  line-height: 1.35;
+  margin: 16px 20px;
+  font-weight: 600;
+}
+
+.type-icon {
+  position: absolute;
+  bottom: 26px;
+  left: 0;
+  right: 0;
+  font-size: 56px;
+  color: var(--green-dark);
+}
+
+.observe {
+  margin-top: 14px;
+  margin-left: 246px;
+  border: 1.4px solid #A8B5B1;
+  border-radius: 8px;
+  background: white;
+  padding: 7px 12px;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.arrow-down {
+  height: 26px;
+  position: relative;
+}
+
+.arrow-down::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 22px;
+  border-left: 2px solid #111;
+}
+
+.arrow-down::after {
+  content: "";
+  position: absolute;
+  left: calc(50% - 5px);
+  top: 18px;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid #111;
+}
+
+.action-card {
+  display: grid;
+  grid-template-columns: 76px 1fr;
+  gap: 6px;
+  border: 1.4px solid #B1C0BC;
+  background: white;
+  border-radius: 7px;
+  padding: 10px 10px 8px 10px;
+  margin-bottom: 8px;
+  min-height: 103px;
+}
+
+.circle-icon {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 25%, #0B6932, #003C1D);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  font-weight: 900;
+  margin: 0 auto;
+  line-height: 1;
+}
+
+.action-card h4,
+.assess-card h4 {
+  margin: 0 0 3px 0;
+  font-size: 21px;
+  color: #11122D;
+  font-weight: 900;
+}
+
+ul {
+  margin: 0;
+  padding-left: 21px;
+}
+
+li {
+  font-size: 16px;
+  line-height: 1.24;
+  margin: 4px 0;
+  font-weight: 600;
+}
+
+.proceed {
+  background: linear-gradient(#004523, #003719);
+  color: white;
+  text-align: center;
+  border-radius: 7px;
+  padding: 12px 10px 11px 10px;
+  font-size: 22px;
+  line-height: 1.05;
+  font-weight: 900;
+}
+
+.proceed span {
+  font-size: 16px;
+}
+
+.assess-card {
+  display: grid;
+  grid-template-columns: 76px 1fr;
+  gap: 6px;
+  border: 1.4px solid #B1C0BC;
+  background: white;
+  border-radius: 7px;
+  padding: 10px 10px 9px 10px;
+  margin-bottom: 11px;
+  min-height: 142px;
+}
+
+.assess-card.history {
+  min-height: 170px;
+}
+
+.assess-card.exam {
+  min-height: 178px;
+}
+
+.assess-card.ox {
+  min-height: 118px;
+}
+
+.abnormal {
+  border: 2px dashed var(--red);
+  background: white;
+  border-radius: 10px;
+  margin: 2px 4px 10px 4px;
+  padding: 12px 8px;
+  text-align: center;
+  min-height: 126px;
+}
+
+.abnormal h4 {
+  margin: 0 0 4px 0;
+  color: var(--red);
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.abnormal p {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.35;
+  font-weight: 700;
+}
+
+.hyperoxia {
+  display: grid;
+  grid-template-columns: 76px 1fr;
+  gap: 6px;
+  border: 1.4px solid #B1C0BC;
+  background: white;
+  border-radius: 7px;
+  padding: 10px;
+  min-height: 101px;
+}
+
+.hyperoxia p {
+  margin: 7px 0 0 0;
+  font-size: 18px;
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+.algo3-icons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 8px;
+  align-items: center;
+  text-align: center;
+}
+
+.top-icon {
+  font-size: 54px;
+  line-height: 1;
+}
+
+.cause-grid,
+.manage-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.cause-card {
+  border-radius: 8px;
+  background: white;
+  overflow: hidden;
+  min-height: 289px;
+}
+
+.cause-card.red {
+  border: 1.5px solid #F24646;
+}
+
+.cause-card.green {
+  border: 1.5px solid #7FA28E;
+}
+
+.cause-card h3 {
+  margin: 0;
+  padding: 11px 8px;
+  text-align: center;
+  font-size: 20px;
+  line-height: 1.15;
+  font-weight: 900;
+  background: white;
+}
+
+.cause-card.red h3 {
+  color: var(--red);
+  border-bottom: 1.5px solid #F24646;
+}
+
+.cause-card.green h3 {
+  color: #0B2F1E;
+  border-bottom: 1.5px solid #7FA28E;
+}
+
+.cause-card li {
+  font-size: 16px;
+  line-height: 1.25;
+  margin: 9px 0;
+}
+
+.cause-card.red li::marker {
+  color: var(--red);
+}
+
+.cause-card.green li::marker {
+  color: var(--green-deep);
+}
+
+.management-card {
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+  min-height: 334px;
+}
+
+.management-card.red {
+  border: 1.5px solid #F24646;
+}
+
+.management-card.green {
+  border: 1.5px solid #7FA28E;
+}
+
+.management-header {
+  color: white;
+  text-align: center;
+  font-size: 21px;
+  font-weight: 900;
+  padding: 9px 8px;
+}
+
+.management-card.red .management-header {
+  background: linear-gradient(#E60000, #C90000);
+}
+
+.management-card.green .management-header {
+  background: linear-gradient(#006126, #00401B);
+}
+
+.manage-row {
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  gap: 7px;
+  padding: 7px 10px 5px 10px;
+  align-items: start;
+}
+
+.manage-row p {
+  margin: 0;
+  font-size: 15.7px;
+  line-height: 1.18;
+  font-weight: 650;
+}
+
+.small-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.red-bg {
+  background: #E60000;
+}
+
+.green-bg {
+  background: #006126;
+}
+
+.supportive {
+  display: grid;
+  grid-template-columns: 86px 1fr;
+  gap: 10px;
+  border: 1.4px solid #B1C0BC;
+  background: var(--cream);
+  border-radius: 8px;
+  padding: 10px 13px;
+  min-height: 102px;
+}
+
+.supportive h3 {
+  margin: 0;
+  font-size: 21px;
+  color: #0B2F1E;
+  font-weight: 900;
+}
+
+.supportive p {
+  margin: 2px 0 0 0;
+  font-size: 17px;
+  line-height: 1.2;
+  font-weight: 650;
+}
+
+.referral-strip {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 30px;
+  height: 76px;
+  border: 1.7px solid #F24646;
+  border-radius: 8px;
+  background: white;
+  display: grid;
+  grid-template-columns: 112px 1fr;
+  align-items: center;
+  padding: 6px 12px;
+}
+
+.warning-triangle {
+  width: 78px;
+  height: 66px;
+  background: var(--red);
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 54px;
+  font-weight: 900;
+  padding-top: 13px;
+  margin-left: 12px;
+}
+
+.referral-content h3 {
+  margin: 0 0 3px 0;
+  color: var(--red);
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+}
+
+.referral-items {
+  display: grid;
+  grid-template-columns: 1.2fr 1.45fr 1.3fr 1.1fr 0.95fr 1.05fr;
+  gap: 12px;
+}
+
+.referral-item {
+  border-left: 2px solid #E57D7D;
+  padding-left: 14px;
+  font-size: 16px;
+  line-height: 1.05;
+  font-weight: 800;
+  position: relative;
+}
+
+.referral-item:first-child {
+  border-left: none;
+}
+
+.referral-item::before {
+  content: "•";
+  color: var(--red);
+  font-size: 22px;
+  margin-right: 8px;
+}
+
+.footer-strip {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 0;
+  height: 29px;
+  border: 1.2px solid #93A59A;
+  border-radius: 6px 6px 0 0;
+  background: var(--green-pale);
+  color: #143924;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 27px;
+}
+
+.connector-horizontal {
+  position: absolute;
+  left: 1014px;
+  top: 603px;
+  width: 35px;
+  border-top: 2px solid #111;
+  z-index: 4;
+}
+
+.connector-horizontal::after {
+  content: "";
+  position: absolute;
+  right: -2px;
+  top: -6px;
+  border-left: 8px solid #111;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+}
+
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 0;
+  }
+
+  body {
+    background: white;
+  }
+
+  .toolbar {
+    display: none;
+  }
+
+  .page {
+    width: 297mm;
+    height: 210mm;
+    margin: 0;
+    box-shadow: none;
+    border: none;
+    transform: none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="toolbar">
+  <button onclick="window.print()">Print / Save as PDF</button>
+  <span>Editable HTML infographic. Use browser zoom if needed.</span>
+</div>
+
+<main class="page">
+
+  <section class="columns">
+
+    <!-- ALGORITHM 1 -->
+    <div class="column">
+      <div class="col-header">
+        ALGORITHM 1<br>
+        <span class="small">INITIAL APPROACH TO CYANOSIS</span>
+      </div>
+
+      <div class="content">
+        <div class="step-title">STEP 1: IDENTIFY TYPE</div>
+
+        <div class="type-grid">
+          <div class="type-card">
+            <h3>CENTRAL CYANOSIS</h3>
+            <p>Lips or tongue blue</p>
+            <p>Oxygen saturation<br>less than 95%</p>
+            <div class="type-icon">👄</div>
+          </div>
+
+          <div class="type-card">
+            <h3>PERIPHERAL CYANOSIS</h3>
+            <p>Hands or feet blue<br>Lips or tongue pink</p>
+            <p>Oxygen saturation<br>greater than or<br>equal to 95%</p>
+            <div class="type-icon">✋ 🦶 🦶</div>
+          </div>
+        </div>
+
+        <div class="arrow-down"></div>
+        <div class="observe">Warm baby and observe</div>
+
+        <div class="arrow-down"></div>
+        <div class="step-title">STEP 2: IMMEDIATE ASSESSMENT</div>
+
+        <div class="action-card">
+          <div class="circle-icon">🫁</div>
+          <div>
+            <h4>STABILISE AIRWAY AND BREATHING</h4>
+            <ul>
+              <li>Start oxygen support to achieve target oxygen saturation 90% to 95%</li>
+              <li>If not responding, consider intubation</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="arrow-down"></div>
+
+        <div class="action-card">
+          <div class="circle-icon">💧</div>
+          <div>
+            <h4>CHECK GLUCOSE AND TEMPERATURE</h4>
+            <ul>
+              <li>Screen for low blood glucose and treat</li>
+              <li>Check temperature and keep warm</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="arrow-down"></div>
+
+        <div class="action-card">
+          <div class="circle-icon">🖥</div>
+          <div>
+            <h4>MONITOR</h4>
+            <ul>
+              <li>Pre- and post-ductal oxygen saturation</li>
+              <li>Heart rate, respirations, perfusion</li>
+              <li>Blood glucose</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="arrow-down"></div>
+
+        <div class="proceed">
+          Proceed to Evaluation<br>
+          <span>(Algorithm 2)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ALGORITHM 2 -->
+    <div class="column">
+      <div class="col-header">
+        ALGORITHM 2<br>
+        <span class="small">EVALUATION OF CENTRAL CYANOSIS</span>
+      </div>
+
+      <div class="content">
+        <div class="step-title">STEP 3: CLINICAL ASSESSMENT</div>
+
+        <div class="assess-card history">
+          <div class="circle-icon">📋</div>
+          <div>
+            <h4>HISTORY</h4>
+            <ul>
+              <li>Review antenatal scan for anomalies</li>
+              <li>Maternal conditions: diabetes, hypertension, infection</li>
+              <li>Birth history and resuscitation details</li>
+              <li>Maternal medication and infection risk</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="assess-card exam">
+          <div class="circle-icon">🩺</div>
+          <div>
+            <h4>EXAMINATION</h4>
+            <ul>
+              <li>General: dysmorphic features, pallor, jaundice, oedema</li>
+              <li>Perfusion: capillary refill time, pulses, blood pressure</li>
+              <li>Cardiac: heart rate, rhythm, murmur</li>
+              <li>Respiratory: work of breathing, air entry</li>
+              <li>Neurological: tone, reflexes, seizures</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="assess-card ox">
+          <div class="circle-icon">📟</div>
+          <div>
+            <h4>PULSE OXIMETRY SCREENING</h4>
+            <ul>
+              <li>Measure oxygen saturation in right hand (pre-ductal) and either foot (post-ductal)</li>
+              <li>Record difference</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="arrow-down"></div>
+
+        <div class="abnormal">
+          <h4>ABNORMAL IF:</h4>
+          <p>
+            Oxygen saturation less than 95% in air<br>
+            <strong>OR</strong><br>
+            Pre-ductal and post-ductal difference greater than 3%
+          </p>
+        </div>
+
+        <div class="arrow-down"></div>
+
+        <div class="step-title">STEP 4: PERFORM HYPEROXIA TEST</div>
+
+        <div class="hyperoxia">
+          <div class="circle-icon">🫁</div>
+          <div>
+            <p>Administer 100% oxygen for 10 minutes and reassess oxygen saturation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ALGORITHM 3 -->
+    <div class="column">
+      <div class="col-header">
+        ALGORITHM 3<br>
+        <span class="small">DIFFERENTIATION AND MANAGEMENT</span>
+      </div>
+
+      <div class="content">
+
+        <div class="algo3-icons">
+          <div class="top-icon">❤️</div>
+          <div class="top-icon">🫁</div>
+        </div>
+
+        <div class="cause-grid">
+          <div class="cause-card red">
+            <h3>CARDIAC CAUSE<br>LIKELY IF:</h3>
+            <ul>
+              <li>Cyanosis persists despite adequate oxygen</li>
+              <li>Weak or absent pulses or poor perfusion</li>
+              <li>Murmur</li>
+              <li>Dysmorphic features</li>
+              <li>Shock or metabolic acidosis</li>
+            </ul>
+          </div>
+
+          <div class="cause-card green">
+            <h3>NON-CARDIAC CAUSE<br>LIKELY IF:</h3>
+            <ul>
+              <li>Oxygen saturation improves with oxygen</li>
+              <li>Signs of respiratory distress or lung disease</li>
+              <li>Normal cardiac examination</li>
+              <li>No differential cyanosis: pre-ductal and post-ductal difference less than 3%</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="manage-grid">
+          <div class="management-card red">
+            <div class="management-header">MANAGEMENT</div>
+
+            <div class="manage-row">
+              <div class="small-icon red-bg">☎</div>
+              <p>Urgently discuss with referral centre.</p>
+            </div>
+
+            <div class="manage-row">
+              <div class="small-icon red-bg">💉</div>
+              <p>Consider prostaglandin E<sub>1</sub> in discussion with referral centre.</p>
+            </div>
+
+            <div class="manage-row">
+              <div class="small-icon red-bg">🩸</div>
+              <p>Obtain blood gas. Low oxygen tension is typical.</p>
+            </div>
+
+            <div class="manage-row">
+              <div class="small-icon red-bg">🚑</div>
+              <p>Arrange urgent transfer to cardiac centre.</p>
+            </div>
+          </div>
+
+          <div class="management-card green">
+            <div class="management-header">MANAGEMENT</div>
+
+            <div class="manage-row">
+              <div class="small-icon green-bg">🫁</div>
+              <p>Provide respiratory support as required.</p>
+            </div>
+
+            <div class="manage-row">
+              <div class="small-icon green-bg">🛡</div>
+              <p>Treat underlying cause, including pneumonia, sepsis, respiratory distress syndrome or persistent pulmonary hypertension.</p>
+            </div>
+
+            <div class="manage-row">
+              <div class="small-icon green-bg">🖥</div>
+              <p>Monitor and reassess frequently.</p>
+            </div>
+
+            <div class="manage-row">
+              <div class="small-icon green-bg">🌡</div>
+              <p>Maintain normothermia and normoglycaemia.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="supportive">
+          <div class="circle-icon">📋</div>
+          <div>
+            <h3>CONTINUE SUPPORTIVE CARE</h3>
+            <p>Maintain target oxygen saturation 90% to 95% using pre-ductal monitoring, monitor vital signs, urine output and perfusion.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <div class="connector-horizontal"></div>
+
+  <section class="referral-strip">
+    <div class="warning-triangle">!</div>
+    <div class="referral-content">
+      <h3>URGENT DISCUSSION AND REFERRAL — ESCALATE IF ANY OF THE FOLLOWING:</h3>
+      <div class="referral-items">
+        <div class="referral-item">Persistent<br>central cyanosis</div>
+        <div class="referral-item">Pre- and post-ductal<br>difference greater than 3%</div>
+        <div class="referral-item">Absent or diminished<br>femoral pulses</div>
+        <div class="referral-item">Pathological<br>murmur</div>
+        <div class="referral-item">Signs of shock</div>
+        <div class="referral-item">Clinical instability</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer-strip">
+    📋 Always monitor, document findings, management and discussions. Escalate care early.
+  </footer>
+
+</main>
+
+</body>
+</html>
