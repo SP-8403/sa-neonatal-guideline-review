@@ -23,7 +23,7 @@
     padding: 0;
     background: #EEF3F0;
     font-family: Arial, Helvetica, sans-serif;
-    overflow: hidden;
+    overflow: auto;
   }
 
   .toolbar {
@@ -48,15 +48,15 @@
   }
 
   .stage {
-    height: calc(100vh - 52px);
-    width: 100vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px;
-    box-sizing: border-box;
-  }
-
+  min-height: calc(100vh - 52px);
+  width: 100vw;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 18px 18px 90px 18px;
+  box-sizing: border-box;
+  overflow: auto;
+}
   #poster {
     width: min(calc(100vw - 16px), calc((100vh - 68px) * 1600 / 1067));
     height: auto;
