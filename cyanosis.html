@@ -239,6 +239,38 @@ body {
   font-weight: 800;
 }
 
+  .type-pathways {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-items: start;
+  margin-top: 0;
+}
+
+.central-path,
+.peripheral-path {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.central-path .arrow {
+  width: 100%;
+  height: 52px;
+}
+
+.peripheral-path .arrow {
+  width: 100%;
+  height: 28px;
+}
+
+.peripheral-stop {
+  margin-left: 0;
+  width: 100%;
+  padding: 7px 8px;
+  font-size: 17px;
+}
+
 .action-card,
 .assessment-card,
 .hyperoxia-card {
@@ -884,11 +916,19 @@ li {
       </div>
     </div>
 
-    <div class="arrow"></div>
-    <div class="observe-box">Warm baby and observe</div>
-    <div class="arrow"></div>
+    <div class="type-pathways">
+      <div class="central-path">
+        <div class="arrow"></div>
+      </div>  
 
-    <div class="step-title">STEP 2: IMMEDIATE ASSESSMENT</div>
+  <div class="peripheral-path">
+    <div class="arrow"></div>
+    <div class="observe-box peripheral-stop">Warm baby if cold and monitor</div>
+  </div>
+</div>
+
+<div class="step-title">STEP 2: IMMEDIATE ASSESSMENT</div>
+
 
     <div class="action-card">
       <div class="icon-circle"><svg><use href="#icon-lungs-solid"></use></svg></div>
