@@ -1075,39 +1075,22 @@ function fitPoster() {
   const wrap = document.getElementById("posterWrap");
   const designWidth = 1600;
   const designHeight = 1067;
-  const availableWidth = window.innerWidth - 28;
-  const scale = Math.min(1, availableWidth / designWidth);
+
+  const toolbar = document.querySelector(".toolbar");
+  const toolbarHeight = toolbar ? toolbar.offsetHeight : 0;
+
+  const availableWidth = window.innerWidth - 32;
+  const availableHeight = window.innerHeight - toolbarHeight - 32;
+
+  const scaleByWidth = availableWidth / designWidth;
+  const scaleByHeight = availableHeight / designHeight;
+
+  const scale = Math.min(1, scaleByWidth, scaleByHeight);
 
   wrap.style.transform = `scale(${scale})`;
   wrap.style.width = `${designWidth}px`;
   wrap.style.height = `${designHeight * scale}px`;
 }
-
-async function downloadPosterPNG() {
-  const poster = document.getElementById("poster");
-
-  await document.fonts.ready;
-
-  const canvas = await html2canvas(poster, {
-    backgroundColor: "#FFFFFF",
-    scale: 5,
-    useCORS: true,
-    allowTaint: true,
-    logging: false,
-    width: poster.offsetWidth,
-    height: poster.offsetHeight,
-    scrollX: 0,
-    scrollY: 0
-  });
-
-  const link = document.createElement("a");
-  link.download = "cyanosis-newborn-algorithm-high-resolution.png";
-  link.href = canvas.toDataURL("image/png");
-  link.click();
-}
-
-window.addEventListener("resize", fitPoster);
-window.addEventListener("load", fitPoster);
 </script>
 
 </body>
