@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hyperoxia Test in the Cyanotic Newborn</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<style>
+:root {
+  --green: #2C5440;
+  --green-dark: #00391F;
+  --green-mid: #0B6C38;
+  --green-pale: #E8F3EF;
+  --cream: #FFFBEA;
+  --cream-border: #D8D1A6;
+  --red: #D90000;
+  --red-soft: #FFF6F6;
+  --amber: #F4A000;
+  --amber-soft: #FFF7E2;
+  --border: #8FA99B;
+  --text: #071525;
+  --navy: #101329;
+  --white: #FFFFFF;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #EEF3F0;
+  font-family: "Source Sans 3", "Source Sans Pro", Arial, sans-serif;
+  color: var(--text);
+}
+
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #0B2F1E;
+  padding: 10px 16px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+}
+
+.toolbar button {
+  border: none;
+  background: #FFFFFF;
+  color: #0B2F1E;
+  font-family: inherit;
+  font-weight: 900;
+  font-size: 14px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.toolbar button:hover {
+  background: var(--green-pale);
+}
+
+.viewer {
+  padding: 14px 14px 140px 14px;
+  overflow: auto;
+  min-height: calc(100vh - 52px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.poster-wrap {
+  transform-origin: top center;
+}
+
+.poster {
+  width: 1600px;
+  height: 1067px;
+  background: #FFFFFF;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 12px 38px rgba(0,0,0,0.18);
+}
+
+.header {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  right: 10px;
+  height: 92px;
+  background: linear-gradient(180deg, #064D2D 0%, #00351D 100%);
+  color: white;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 38px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: 0.6px;
+}
+
+.header p {
+  margin: 7px 0 0 0;
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.content {
+  position: absolute;
+  top: 112px;
+  left: 10px;
+  right: 10px;
+  bottom: 92px;
+  display: grid;
+  grid-template-columns: 0.95fr 1.45fr 1.1fr;
+  gap: 12px;
+}
+
+.panel {
+  border: 1.5px solid var(--border);
+  border-radius: 9px;
+  background: #FBFCFC;
+  overflow: hidden;
+  position: relative;
+}
+
+.panel-title {
+  background: linear-gradient(180deg, #064D2D 0%, #00351D 100%);
+  color: white;
+  padding: 12px 14px;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1.05;
+  text-align: center;
+}
+
+.panel-body {
+  padding: 14px;
+}
+
+.info-box {
+  border: 1.3px solid #AABAB4;
+  background: #FFFFFF;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.info-box.cream {
+  background: var(--cream);
+  border-color: var(--cream-border);
+}
+
+.info-box h3 {
+  margin: 0 0 8px 0;
+  color: var(--green-dark);
+  font-size: 21px;
+  font-weight: 900;
+  line-height: 1.05;
+}
+
+.info-box p {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.25;
+  font-weight: 600;
+}
+
+ul {
+  margin: 0;
+  padding-left: 21px;
+}
+
+li {
+  font-size: 16.5px;
+  line-height: 1.22;
+  margin: 5px 0;
+  font-weight: 600;
+}
+
+.step-card {
+  display: grid;
+  grid-template-columns: 62px 1fr;
+  gap: 10px;
+  align-items: start;
+  border: 1.3px solid #AABAB4;
+  border-radius: 8px;
+  background: #FFFFFF;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+}
+
+.icon-circle {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 25%, #0B6C38 0%, #005C2E 48%, #003C21 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 29px;
+  font-weight: 900;
+  box-shadow: inset 0 2px 4px rgba(255,255,255,0.22), 0 1px 3px rgba(0,0,0,0.18);
+}
+
+.step-card h3 {
+  margin: 0 0 4px 0;
+  color: var(--navy);
+  font-size: 20px;
+  line-height: 1.05;
+  font-weight: 900;
+}
+
+.step-card p {
+  margin: 0;
+  font-size: 16.5px;
+  line-height: 1.22;
+  font-weight: 600;
+}
+
+.interpret-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 9px;
+}
+
+.result-card {
+  border-radius: 9px;
+  overflow: hidden;
+  border: 1.5px solid #AABAB4;
+  background: #FFFFFF;
+}
+
+.result-card.green {
+  border-color: #7EA18E;
+}
+
+.result-card.amber {
+  border-color: #E1AE42;
+}
+
+.result-card.red {
+  border-color: #E45656;
+}
+
+.result-card .result-head {
+  padding: 8px 12px;
+  color: #FFFFFF;
+  font-size: 19px;
+  font-weight: 900;
+  line-height: 1.05;
+  text-align: center;
+}
+
+.result-card.green .result-head {
+  background: linear-gradient(180deg, #076B38 0%, #004222 100%);
+}
+
+.result-card.amber .result-head {
+  background: linear-gradient(180deg, #F4A000 0%, #C27A00 100%);
+}
+
+.result-card.red .result-head {
+  background: linear-gradient(180deg, #E60000 0%, #C70000 100%);
+}
+
+.result-card .result-body {
+  padding: 9px 12px;
+}
+
+.result-body p {
+  margin: 0;
+  font-size: 15.8px;
+  line-height: 1.18;
+  font-weight: 600;
+}
+
+.result-body strong {
+  font-weight: 900;
+}
+
+.value-row {
+  display: grid;
+  grid-template-columns: 112px 1fr;
+  gap: 8px;
+  margin: 3px 0;
+}
+
+.value-label {
+  font-weight: 900;
+  color: var(--green-dark);
+}
+
+.red .value-label {
+  color: var(--red);
+}
+
+.amber .value-label {
+  color: #9A6200;
+}
+
+.callout {
+  border: 2px dashed var(--red);
+  background: var(--red-soft);
+  border-radius: 10px;
+  padding: 13px;
+  margin-bottom: 12px;
+}
+
+.callout h3 {
+  margin: 0 0 8px 0;
+  color: var(--red);
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1.05;
+}
+
+.callout p {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.22;
+  font-weight: 700;
+}
+
+.side-note {
+  border: 1.5px solid var(--cream-border);
+  background: var(--cream);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.side-note h3 {
+  margin: 0 0 8px 0;
+  color: var(--green-dark);
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.side-note p {
+  margin: 0;
+  font-size: 16.5px;
+  line-height: 1.25;
+  font-weight: 600;
+}
+
+.footer-strip {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 52px;
+  height: 34px;
+  background: var(--green-pale);
+  border: 1.2px solid var(--border);
+  border-radius: 6px;
+  color: #143924;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.alert-strip {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  height: 36px;
+  background: #FFFFFF;
+  border: 1.8px solid var(--red);
+  border-radius: 7px;
+  color: var(--red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  font-weight: 900;
+}
+
+.alert-strip span {
+  color: var(--text);
+  font-weight: 700;
+  margin-left: 8px;
+}
+
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 0;
+  }
+
+  .toolbar {
+    display: none;
+  }
+
+  html,
+  body {
+    background: white;
+    overflow: visible;
+  }
+
+  .viewer {
+    padding: 0;
+    overflow: visible;
+    display: block;
+    min-height: auto;
+  }
+
+  .poster-wrap {
+    transform: none !important;
+  }
+
+  .poster {
+    width: 297mm;
+    height: 210mm;
+    box-shadow: none;
+    border-radius: 0;
+    border: none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="toolbar">
+  <button onclick="downloadPosterPNG()">Download high-resolution PNG</button>
+  <button onclick="window.print()">Print / Save as PDF</button>
+</div>
+
+<div class="viewer">
+<div class="poster-wrap" id="posterWrap">
+
+<main class="poster" id="poster">
+
+<header class="header">
+  <h1>HYPEROXIA TEST IN THE CYANOTIC NEWBORN</h1>
+  <p>Use to support differentiation between cardiac and pulmonary causes of persistent central cyanosis</p>
+</header>
+
+<section class="content">
+
+  <section class="panel">
+    <div class="panel-title">PROCEDURE</div>
+    <div class="panel-body">
+
+      <div class="info-box cream">
+        <h3>Purpose</h3>
+        <p>The hyperoxia test assists in differentiating cardiac from pulmonary causes of cyanosis.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="icon-circle">1</div>
+        <div>
+          <h3>Administer oxygen</h3>
+          <p>Administer 100% oxygen for 10 minutes.</p>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="icon-circle">2</div>
+        <div>
+          <h3>Measure pre-ductal saturation</h3>
+          <p>Measure oxygen saturation in the right hand.</p>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="icon-circle">3</div>
+        <div>
+          <h3>Obtain arterial blood gas</h3>
+          <p>Obtain arterial blood gas from the right radial artery to measure PaO₂.</p>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="icon-circle">4</div>
+        <div>
+          <h3>Use chest x-ray selectively</h3>
+          <p>Chest x-ray is not part of the hyperoxia test but may provide additional diagnostic information.</p>
+        </div>
+      </div>
+
+      <div class="side-note">
+        <h3>Important</h3>
+        <p>Interpret results with the full clinical assessment, pre- and post-ductal saturations, perfusion, respiratory findings and haemodynamic stability.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-title">INTERPRETATION</div>
+    <div class="panel-body">
+
+      <div class="interpret-grid">
+
+        <div class="result-card green">
+          <div class="result-head">PASS / NORMAL<br>Severe cardiac or pulmonary disease unlikely</div>
+          <div class="result-body">
+            <div class="value-row"><div class="value-label">PaO₂</div><div>&gt; 300 mmHg / 40 kPa</div></div>
+            <div class="value-row"><div class="value-label">SpO₂</div><div>100%</div></div>
+            <div class="value-row"><div class="value-label">CXR</div><div>Normal</div></div>
+          </div>
+        </div>
+
+        <div class="result-card amber">
+          <div class="result-head">PULMONARY DISEASE MORE LIKELY</div>
+          <div class="result-body">
+            <div class="value-row"><div class="value-label">PaO₂</div><div>&gt; 150 mmHg / 20 kPa</div></div>
+            <div class="value-row"><div class="value-label">SpO₂</div><div>100% or increase by ≥ 10%</div></div>
+            <div class="value-row"><div class="value-label">CXR</div><div>Lung pathology</div></div>
+          </div>
+        </div>
+
+        <div class="result-card amber">
+          <div class="result-head">SEVERE LUNG DISEASE / PPHN</div>
+          <div class="result-body">
+            <div class="value-row"><div class="value-label">PaO₂</div><div>50–150 mmHg / 6.7–20 kPa</div></div>
+            <div class="value-row"><div class="value-label">SpO₂</div><div>Less than 100%</div></div>
+            <div class="value-row"><div class="value-label">CXR</div><div>Lung pathology or oligaemia, with dark lung fields</div></div>
+          </div>
+        </div>
+
+        <div class="result-card red">
+          <div class="result-head">CYANOTIC CONGENITAL HEART DISEASE<br>Right outflow obstruction / duct-dependent lesion</div>
+          <div class="result-body">
+            <div class="value-row"><div class="value-label">PaO₂</div><div>&lt; 50 mmHg / 6.7 kPa</div></div>
+            <div class="value-row"><div class="value-label">SpO₂</div><div>&lt; 85%</div></div>
+            <div class="value-row"><div class="value-label">CXR</div><div>Oligaemia, with dark lung fields</div></div>
+          </div>
+        </div>
+
+        <div class="result-card red">
+          <div class="result-head">CYANOTIC CONGENITAL HEART DISEASE<br>Mixing lesion</div>
+          <div class="result-body">
+            <div class="value-row"><div class="value-label">PaO₂</div><div>50–150 mmHg / 6.7–20 kPa</div></div>
+            <div class="value-row"><div class="value-label">SpO₂</div><div>Less than 100%</div></div>
+            <div class="value-row"><div class="value-label">CXR</div><div>Cardiomegaly or increased pulmonary blood flow</div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-title">ESCALATION AND SAFETY</div>
+    <div class="panel-body">
+
+      <div class="callout">
+        <h3>UNSTABLE CYANOTIC NEONATE</h3>
+        <p>Requires urgent referral irrespective of the hyperoxia test result.</p>
+      </div>
+
+      <div class="side-note">
+        <h3>Discuss urgently if cardiac disease is suspected</h3>
+        <p>Urgently discuss with the referral centre or paediatric cardiology service if the clinical assessment or hyperoxia test suggests cyanotic congenital heart disease or a duct-dependent lesion.</p>
+      </div>
+
+      <div class="side-note">
+        <h3>Do not delay stabilisation</h3>
+        <p>Continue airway and breathing support, pre-ductal saturation monitoring, glucose correction, temperature control and perfusion assessment while awaiting transfer.</p>
+      </div>
+
+      <div class="side-note">
+        <h3>Consider sepsis if clinically indicated</h3>
+        <p>If cyanosis persists despite adequate ventilation and oxygenation, and the baby is unwell, take a blood culture where feasible and start broad-spectrum antibiotics according to local neonatal sepsis guidance.</p>
+      </div>
+
+      <div class="info-box">
+        <h3>Documentation</h3>
+        <ul>
+          <li>Record oxygen exposure time.</li>
+          <li>Record right-hand oxygen saturation.</li>
+          <li>Record arterial PaO₂ result and units.</li>
+          <li>Record referral discussion, advice and transfer plan.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+</section>
+
+<div class="footer-strip">
+  Interpret the hyperoxia test with the full clinical assessment. Escalate early when cyanosis persists.
+</div>
+
+<div class="alert-strip">
+  URGENT REFERRAL:
+  <span>Unstable cyanotic neonates require urgent discussion and transfer planning.</span>
+</div>
+
+</main>
+
+</div>
+</div>
+
+<script>
+function fitPoster() {
+  const wrap = document.getElementById("posterWrap");
+  const designWidth = 1600;
+  const designHeight = 1067;
+
+  const toolbar = document.querySelector(".toolbar");
+  const toolbarHeight = toolbar ? toolbar.offsetHeight : 0;
+
+  const availableWidth = window.innerWidth - 28;
+  const availableHeight = window.innerHeight - toolbarHeight - 40;
+
+  const scale = Math.min(
+    1,
+    availableWidth / designWidth,
+    availableHeight / designHeight
+  );
+
+  wrap.style.transform = `scale(${scale})`;
+  wrap.style.width = `${designWidth}px`;
+  wrap.style.height = `${designHeight * scale}px`;
+}
+
+async function downloadPosterPNG() {
+  const poster = document.getElementById("poster");
+
+  if (!poster) {
+    alert("Poster not found.");
+    return;
+  }
+
+  await document.fonts.ready;
+
+  const clone = poster.cloneNode(true);
+
+  const exportContainer = document.createElement("div");
+  exportContainer.style.position = "fixed";
+  exportContainer.style.left = "-10000px";
+  exportContainer.style.top = "0";
+  exportContainer.style.width = "1600px";
+  exportContainer.style.height = "1067px";
+  exportContainer.style.background = "#FFFFFF";
+  exportContainer.style.zIndex = "-1";
+
+  clone.style.transform = "none";
+  clone.style.width = "1600px";
+  clone.style.height = "1067px";
+  clone.style.boxShadow = "none";
+  clone.style.borderRadius = "0";
+
+  exportContainer.appendChild(clone);
+  document.body.appendChild(exportContainer);
+
+  await new Promise(resolve => setTimeout(resolve, 300));
+
+  const canvas = await html2canvas(clone, {
+    backgroundColor: "#FFFFFF",
+    scale: 5,
+    useCORS: true,
+    allowTaint: true,
+    logging: false,
+    width: 1600,
+    height: 1067,
+    scrollX: 0,
+    scrollY: 0
+  });
+
+  document.body.removeChild(exportContainer);
+
+  const link = document.createElement("a");
+  link.download = "hyperoxia-test-cyanotic-newborn-high-resolution.png";
+  link.href = canvas.toDataURL("image/png");
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+window.addEventListener("resize", fitPoster);
+window.addEventListener("load", fitPoster);
+setTimeout(fitPoster, 300);
+setTimeout(fitPoster, 1000);
+</script>
+
+</body>
+</html>
