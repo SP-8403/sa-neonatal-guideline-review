@@ -256,7 +256,15 @@ body {
 
 .central-path .arrow {
   width: 100%;
-  height: 52px;
+  height: 74px;
+}
+
+.central-path .arrow::before {
+  height: 66px;
+}
+
+.central-path .arrow::after {
+  top: 64px;
 }
 
 .peripheral-path .arrow {
@@ -769,46 +777,54 @@ li {
 </symbol>
 
 <symbol id="icon-hand-foot-solid" viewBox="0 0 120 80">
-  <!-- Simplified hand -->
+  <symbol id="icon-hand-foot-solid" viewBox="0 0 120 80">
   <path
     d="M18 66
        C10 66, 6 61, 6 53
-       V36
-       C6 31, 13 31, 13 36
-       V49
-       H17
-       V24
-       C17 18, 25 18, 25 24
-       V48
-       H29
-       V19
-       C29 13, 37 13, 37 19
-       V48
-       H41
-       V26
-       C41 20, 49 20, 49 26
+       V39
+       C6 34, 13 34, 13 39
        V51
-       C54 45, 63 49, 60 57
-       C56 64, 47 66, 38 66
+       H17
+       V27
+       C17 22, 24 22, 24 27
+       V50
+       H28
+       V22
+       C28 17, 35 17, 35 22
+       V50
+       H39
+       V30
+       C39 25, 46 25, 46 30
+       V53
+       C51 48, 59 51, 57 58
+       C54 64, 47 66, 39 66
        H18Z"
     fill="currentColor"
   />
 
-  <!-- Simplified foot -->
   <path
-    d="M82 64
-       C72 60, 67 53, 68 42
-       C69 27, 78 14, 91 14
-       C105 14, 114 30, 115 45
-       C116 61, 99 72, 82 64Z"
+    d="M78 64
+       C70 60, 66 54, 67 45
+       C68 32, 75 20, 86 20
+       C98 20, 106 33, 107 46
+       C108 60, 94 70, 78 64Z"
     fill="currentColor"
   />
 
-  <!-- Simplified toes -->
-  <circle cx="84" cy="11" r="4" fill="currentColor"/>
-  <circle cx="93" cy="9" r="4" fill="currentColor"/>
-  <circle cx="102" cy="12" r="4" fill="currentColor"/>
-  <circle cx="110" cy="18" r="4" fill="currentColor"/>
+  <path
+    d="M101 65
+       C94 62, 91 56, 92 48
+       C93 36, 100 25, 110 25
+       C121 25, 128 38, 128 50
+       C128 63, 115 72, 101 65Z"
+    fill="currentColor"
+    transform="translate(-8 0)"
+  />
+
+  <circle cx="82" cy="16" r="3.6" fill="currentColor"/>
+  <circle cx="90" cy="14" r="3.6" fill="currentColor"/>
+  <circle cx="98" cy="17" r="3.6" fill="currentColor"/>
+  <circle cx="105" cy="23" r="3.6" fill="currentColor"/>
 </symbol>
 
   <symbol id="icon-droplet-solid" viewBox="0 0 64 64">
@@ -1032,11 +1048,11 @@ li {
 
       <p>
 
-        Oxygen saturation less than 95% in air<br>
+        Oxygen saturation < 95% in air<br>
 
         <strong>OR</strong><br>
 
-        Pre-ductal and post-ductal difference greater than 3%
+        Pre-ductal and post-ductal difference > 3%
 
       </p>
 
@@ -1093,7 +1109,7 @@ li {
           <li>Oxygen saturation improves with oxygen</li>
           <li>Signs of respiratory distress or lung disease</li>
           <li>Normal cardiac examination</li>
-          <li>No differential cyanosis: Pre and post-ductal difference < 3%</li>
+          <li>No differential cyanosis:Pre and post-ductal difference < 3%</li>
         </ul>
       </div>
     </div>
@@ -1138,8 +1154,8 @@ li {
 
         <div class="management-row">
           <div class="small-circle green"><svg><use href="#icon-monitor-solid"></use></svg></div>
-          <p>Monitor and reassess frequently </p>
-        </div>
+          <p>Monitor and reassess frequently. Discuss or refer if hypoxaemia persists, respiratory distress is severe, or the baby is clinically unstable.</p>
+      </div>
 
         <div class="management-row">
           <div class="small-circle green"><svg><use href="#icon-thermometer-solid"></use></svg></div>
