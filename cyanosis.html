@@ -1071,25 +1071,95 @@ li {
 </div>
 
 <script>
+<style>
+.viewer {
+  padding: 10px !important;
+  overflow: hidden !important;
+  height: calc(100vh - 54px) !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+}
+
+.poster-wrap {
+  transform-origin: top center !important;
+}
+
+body {
+  overflow: hidden !important;
+}
+</style>
+
+<script>
 function fitPoster() {
   const wrap = document.getElementById("posterWrap");
+  if (!wrap) return;
+
   const designWidth = 1600;
   const designHeight = 1067;
 
   const toolbar = document.querySelector(".toolbar");
   const toolbarHeight = toolbar ? toolbar.offsetHeight : 0;
 
-  const availableWidth = window.innerWidth - 32;
-  const availableHeight = window.innerHeight - toolbarHeight - 32;
+  const availableWidth = window.innerWidth - 24;
+  const availableHeight = window.innerHeight - toolbarHeight - 24;
 
   const scaleByWidth = availableWidth / designWidth;
   const scaleByHeight = availableHeight / designHeight;
 
   const scale = Math.min(1, scaleByWidth, scaleByHeight);
 
-  wrap.style.transform = `scale(${scale})`;
-  wrap.style.width = `${designWidth}px`;
-  wrap.style.height = `${designHeight * scale}px`;
+  wrap.style.transform = "scale(" + scale + ")";
+  wrap.style.width = designWidth + "px";
+  wrap.style.height = (designHeight * scale) + "px";
+}
+
+async function downloadPosterPNG() {
+  const poster = document.getElementById("poster");
+  const wrap = document.getElementById("posterWrap");
+
+  if (!poster) {
+    alert("Poster not found.");
+    return;
+  }
+
+  await document.fonts.ready;
+
+  const oldTransform = wrap.style.transform;
+  const oldHeight = wrap.style.height;
+
+  wrap.style.transform = "scale(1)";
+  wrap.style.height = "1067px";
+
+  await new Promise(resolve => setTimeout(resolve, 200));
+
+  const canvas = await html2canvas(poster, {
+    backgroundColor: "#FFFFFF",
+    scale: 5,
+    useCORS: true,
+    allowTaint: true,
+    logging: false,
+    width: 1600,
+    height: 1067,
+    scrollX: 0,
+    scrollY: 0
+  });
+
+  wrap.style.transform = oldTransform;
+  wrap.style.height = oldHeight;
+  fitPoster();
+
+  const link = document.createElement("a");
+  link.download = "cyanosis-newborn-algorithm-high-resolution.png";
+  link.href = canvas.toDataURL("image/png");
+  link.click();
+}
+
+window.addEventListener("load", fitPoster);
+window.addEventListener("resize", fitPoster);
+setTimeout(fitPoster, 300);
+setTimeout(fitPoster, 1000);
+</script>
 }
 </script>
 
