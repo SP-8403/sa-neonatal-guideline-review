@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pulse Oximetry Screening Process</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+:root {
+  --green: #2C5440;
+  --green-dark: #1F3F31;
+  --green-mid: #3F7A5A;
+  --green-soft: #E8F3EF;
+  --green-soft-2: #F5FAF7;
+
+  --yellow: #FFF7D6;
+  --yellow-border: #E4D58A;
+
+  --amber: #9A6200;
+  --amber-soft: #FFF8E8;
+  --amber-border: #E7C77A;
+
+  --red: #9F3A38;
+  --red-dark: #7E2E2C;
+  --red-soft: #FFF7F6;
+  --red-border: #D9A7A4;
+
+  --purple: #5F4B8B;
+  --purple-soft: #F1ECFA;
+  --purple-border: #B7A8D9;
+
+  --border: #8FA99B;
+  --text: #071525;
+  --navy: #101329;
+  --white: #FFFFFF;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #EEF3F0;
+  font-family: "Source Sans 3", "Source Sans Pro", Arial, sans-serif;
+  color: var(--text);
+}
+
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #0B2F1E;
+  padding: 10px 16px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+}
+
+.toolbar button {
+  border: none;
+  background: #FFFFFF;
+  color: #0B2F1E;
+  font-family: inherit;
+  font-weight: 900;
+  font-size: 14px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.toolbar button:hover {
+  background: var(--green-soft);
+}
+
+.editing .poster [contenteditable="true"] {
+  outline: 2px dashed rgba(44, 84, 64, 0.35);
+  outline-offset: 2px;
+  cursor: text;
+}
+
+.editing .poster [contenteditable="true"]:focus {
+  outline: 2px solid #2C5440;
+  background: rgba(232, 243, 239, 0.55);
+}
+
+.viewer {
+  padding: 14px 14px 140px 14px;
+  overflow: auto;
+  min-height: calc(100vh - 52px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.poster-wrap {
+  transform-origin: top center;
+}
+
+.poster {
+  width: 1600px;
+  height: 1067px;
+  background: #FFFFFF;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 12px 38px rgba(0,0,0,0.18);
+}
+
+/* HEADER */
+
+.header {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  right: 10px;
+  height: 92px;
+  background: linear-gradient(180deg, #2C5440 0%, #1F3F31 100%);
+  color: white;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 38px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: 0.6px;
+}
+
+.header p {
+  margin: 7px 0 0 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* LAYOUT */
+
+.content {
+  position: absolute;
+  top: 112px;
+  left: 10px;
+  right: 10px;
+  bottom: 76px;
+  display: grid;
+  grid-template-rows: 118px 1fr;
+  gap: 12px;
+}
+
+.measurement-bar {
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  background: var(--green-soft-2);
+  overflow: hidden;
+}
+
+.measurement-title {
+  background: linear-gradient(180deg, #2C5440 0%, #1F3F31 100%);
+  color: white;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 900;
+  padding: 10px 14px;
+  line-height: 1;
+}
+
+.measurement-text {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--green-dark);
+  padding: 18px 24px;
+  line-height: 1.15;
+}
+
+.flow-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.08fr 1fr;
+  gap: 14px;
+  align-items: stretch;
+}
+
+.path-card {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1.8px solid var(--border);
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.path-card.red {
+  border-color: var(--red-border);
+  background: var(--red-soft);
+}
+
+.path-card.amber {
+  border-color: var(--amber-border);
+  background: var(--amber-soft);
+}
+
+.path-card.green {
+  border-color: #95B7A6;
+  background: var(--green-soft-2);
+}
+
+.path-head {
+  padding: 14px 18px;
+  text-align: center;
+  color: white;
+  font-size: 34px;
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: 0.2px;
+}
+
+.path-card.red .path-head {
+  background: linear-gradient(180deg, #FCEBE9 0%, #F3D2CF 100%);
+  color: var(--red-dark);
+  border-bottom: 1.5px solid var(--red-border);
+}
+
+.path-card.amber .path-head {
+  background: linear-gradient(180deg, #FFF7D6 0%, #F1DEA0 100%);
+  color: #5A3A00;
+  border-bottom: 1.5px solid var(--amber-border);
+}
+
+.path-card.green .path-head {
+  background: linear-gradient(180deg, #3F7A5A 0%, #2C5440 100%);
+  color: white;
+}
+
+.path-subtitle {
+  display: inline-block;
+  margin-top: 9px;
+  padding: 5px 13px;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.red .path-subtitle {
+  background: rgba(159, 58, 56, 0.12);
+  color: var(--red-dark);
+}
+
+.amber .path-subtitle {
+  background: rgba(154, 98, 0, 0.14);
+  color: #5A3A00;
+}
+
+.green .path-subtitle {
+  background: rgba(255,255,255,0.18);
+  color: #FFFFFF;
+}
+
+.path-body {
+  padding: 18px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.criteria-box {
+  background: #FFFFFF;
+  border: 1.4px solid rgba(143, 169, 155, 0.8);
+  border-radius: 10px;
+  padding: 16px 16px;
+  min-height: 168px;
+}
+
+.criteria-label {
+  color: var(--green-dark);
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.criteria-text {
+  font-size: 27px;
+  font-weight: 800;
+  line-height: 1.08;
+  color: var(--text);
+}
+
+.criteria-text small {
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.or-text {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--green-dark);
+  margin: 6px 0;
+}
+
+.action-box {
+  border-radius: 10px;
+  padding: 15px 16px;
+  border: 1.5px solid;
+  background: #FFFFFF;
+}
+
+.red .action-box {
+  border-color: var(--red-border);
+}
+
+.amber .action-box {
+  border-color: var(--amber-border);
+}
+
+.green .action-box {
+  border-color: #95B7A6;
+}
+
+.action-title {
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1.05;
+  text-align: center;
+  margin-bottom: 7px;
+  text-transform: uppercase;
+}
+
+.red .action-title {
+  color: var(--red-dark);
+}
+
+.amber .action-title {
+  color: var(--amber);
+}
+
+.green .action-title {
+  color: var(--green-dark);
+}
+
+.action-text {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.08;
+  text-align: center;
+}
+
+/* RETEST COLUMN */
+
+.retest-column {
+  display: grid;
+  grid-template-rows: auto 52px auto 1fr;
+  gap: 12px;
+}
+
+.arrow-down {
+  position: relative;
+  height: 52px;
+}
+
+.arrow-down::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 42px;
+  border-left: 3px solid #1F3F31;
+}
+
+.arrow-down::after {
+  content: "";
+  position: absolute;
+  left: calc(50% - 8px);
+  top: 39px;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-top: 12px solid #1F3F31;
+}
+
+.measurement-two {
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  background: var(--green-soft);
+  overflow: hidden;
+}
+
+.measurement-two-title {
+  background: linear-gradient(180deg, #2C5440 0%, #1F3F31 100%);
+  color: white;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 900;
+  padding: 8px 12px;
+  line-height: 1;
+}
+
+.measurement-two-text {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--green-dark);
+  text-align: center;
+  padding: 12px 14px;
+  line-height: 1.1;
+}
+
+.second-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.small-path {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1.5px solid;
+  background: white;
+}
+
+.small-path.red {
+  border-color: var(--red-border);
+  background: var(--red-soft);
+}
+
+.small-path.green {
+  border-color: #95B7A6;
+  background: var(--green-soft-2);
+}
+
+.small-head {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 900;
+  padding: 10px 10px;
+  line-height: 1;
+}
+
+.small-path.red .small-head {
+  color: var(--red-dark);
+  background: linear-gradient(180deg, #FCEBE9 0%, #F3D2CF 100%);
+  border-bottom: 1.5px solid var(--red-border);
+}
+
+.small-path.green .small-head {
+  color: white;
+  background: linear-gradient(180deg, #3F7A5A 0%, #2C5440 100%);
+}
+
+.small-body {
+  padding: 12px;
+}
+
+.small-body .criteria-text {
+  font-size: 21px;
+  line-height: 1.08;
+}
+
+.small-body .action-title {
+  font-size: 19px;
+}
+
+.small-body .action-text {
+  font-size: 18px;
+  line-height: 1.08;
+}
+
+.small-body .criteria-box {
+  min-height: 126px;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+
+.small-body .action-box {
+  padding: 11px;
+}
+
+/* FOOTER */
+
+.footer-strip {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 34px;
+  height: 34px;
+  background: var(--green-soft);
+  border: 1.2px solid var(--border);
+  border-radius: 6px;
+  color: #143924;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.imprint {
+  position: absolute;
+  right: 18px;
+  bottom: 9px;
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(31, 63, 49, 0.45);
+  letter-spacing: 0.2px;
+}
+
+/* PRINT FALLBACK */
+
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 0;
+  }
+
+  .toolbar {
+    display: none !important;
+  }
+
+  html,
+  body {
+    width: 297mm;
+    height: 210mm;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+    overflow: hidden !important;
+  }
+
+  .viewer {
+    width: 297mm;
+    height: 210mm;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    display: block !important;
+  }
+
+  .poster-wrap {
+    transform: none !important;
+    width: 297mm !important;
+    height: 210mm !important;
+  }
+
+  .poster {
+    width: 297mm !important;
+    height: 210mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    border: none !important;
+    overflow: hidden !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="toolbar">
+  <button onclick="toggleEditMode()">Edit text live</button>
+  <button onclick="downloadEditedHTML()">Download edited HTML</button>
+  <button onclick="downloadPosterPNG()">Download high-resolution PNG</button>
+  <button onclick="downloadPosterPDF()">Download exact PDF</button>
+</div>
+
+<div class="viewer">
+<div class="poster-wrap" id="posterWrap">
+
+<main class="poster" id="poster">
+
+<header class="header">
+  <h1>SCREENING PROCESS</h1>
+  <p>Pulse oximetry screening for critical congenital heart disease</p>
+</header>
+
+<section class="content">
+
+  <section class="measurement-bar">
+    <div class="measurement-title">MEASUREMENT 1</div>
+    <div class="measurement-text">
+      Measure oxygen saturation in the right hand and either foot at 24 hours of life, or earlier if being discharged, or at presentation.
+    </div>
+  </section>
+
+  <section class="flow-grid">
+
+    <section class="path-card red">
+      <div class="path-head">
+        FAIL<br>
+        <span class="path-subtitle">Immediate action</span>
+      </div>
+      <div class="path-body">
+        <div class="criteria-box">
+          <div class="criteria-label">Criteria</div>
+          <div class="criteria-text">
+            SpO₂ ≤ 89%<br>
+            <small>in either the right hand or foot</small>
+          </div>
+        </div>
+
+        <div class="action-box">
+          <div class="action-title">Action: Refer</div>
+          <div class="action-text">Refer for immediate assessment.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="retest-column">
+
+      <section class="path-card amber">
+        <div class="path-head">
+          INDETERMINATE / RETEST<br>
+          <span class="path-subtitle">Repeat measurement</span>
+        </div>
+        <div class="path-body">
+          <div class="criteria-box">
+            <div class="criteria-label">Criteria</div>
+            <div class="criteria-text">
+              SpO₂ 90%–94%<br>
+              <small>in either right hand or foot</small>
+              <div class="or-text">OR</div>
+              <small>difference ≥ 4% between right hand and foot</small>
+            </div>
+          </div>
+
+          <div class="action-box">
+            <div class="action-title">Action: Re-test</div>
+            <div class="action-text">Repeat pulse oximetry in one hour.</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="arrow-down"></div>
+
+      <section class="measurement-two">
+        <div class="measurement-two-title">MEASUREMENT 2</div>
+        <div class="measurement-two-text">
+          Repeat right-hand and foot oxygen saturation after one hour.
+        </div>
+      </section>
+
+      <section class="second-grid">
+
+        <div class="small-path red">
+          <div class="small-head">FAIL</div>
+          <div class="small-body">
+            <div class="criteria-box">
+              <div class="criteria-label">Criteria</div>
+              <div class="criteria-text">
+                SpO₂ 90%–94%<br>
+                <small>or difference ≥ 4%</small>
+              </div>
+            </div>
+            <div class="action-box">
+              <div class="action-title">Action: Refer</div>
+              <div class="action-text">Refer for assessment.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="small-path green">
+          <div class="small-head">PASS</div>
+          <div class="small-body">
+            <div class="criteria-box">
+              <div class="criteria-label">Criteria</div>
+              <div class="criteria-text">
+                SpO₂ ≥ 95%<br>
+                <small>in right hand and foot</small><br>
+                <small>and difference ≤ 3%</small>
+              </div>
+            </div>
+            <div class="action-box">
+              <div class="action-title">No further screening</div>
+              <div class="action-text">Provide routine newborn care if well.</div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+    </section>
+
+    <section class="path-card green">
+      <div class="path-head">
+        PASS<br>
+        <span class="path-subtitle">Screen complete</span>
+      </div>
+      <div class="path-body">
+        <div class="criteria-box">
+          <div class="criteria-label">Criteria</div>
+          <div class="criteria-text">
+            SpO₂ ≥ 95%<br>
+            <small>in right hand and foot</small>
+            <div class="or-text">AND</div>
+            <small>difference ≤ 3% between right hand and foot</small>
+          </div>
+        </div>
+
+        <div class="action-box">
+          <div class="action-title">No further screening</div>
+          <div class="action-text">Provide routine newborn care if well.</div>
+        </div>
+      </div>
+    </section>
+
+  </section>
+
+</section>
+
+<div class="footer-strip">
+  Any failed screen requires clinical assessment and escalation according to the local referral pathway.
+</div>
+
+<div class="imprint">National Neonatal Guidelines · South Africa · 2026</div>
+
+</main>
+
+</div>
+</div>
+
+<script>
+let editMode = false;
+
+function toggleEditMode() {
+  editMode = !editMode;
+
+  document.body.classList.toggle("editing", editMode);
+
+  const editableSelectors = [
+    ".header h1",
+    ".header p",
+    ".measurement-title",
+    ".measurement-text",
+    ".path-head",
+    ".path-subtitle",
+    ".criteria-label",
+    ".criteria-text",
+    ".criteria-text small",
+    ".or-text",
+    ".action-title",
+    ".action-text",
+    ".measurement-two-title",
+    ".measurement-two-text",
+    ".small-head",
+    ".footer-strip",
+    ".imprint"
+  ];
+
+  editableSelectors.forEach(selector => {
+    document.querySelectorAll(selector).forEach(el => {
+      el.setAttribute("contenteditable", editMode ? "true" : "false");
+      el.setAttribute("spellcheck", "true");
+    });
+  });
+
+  const button = document.querySelector("button[onclick='toggleEditMode()']");
+  if (button) {
+    button.textContent = editMode ? "Lock text" : "Edit text live";
+  }
+}
+
+function fitPoster() {
+  const wrap = document.getElementById("posterWrap");
+  const designWidth = 1600;
+  const designHeight = 1067;
+
+  const toolbar = document.querySelector(".toolbar");
+  const toolbarHeight = toolbar ? toolbar.offsetHeight : 0;
+
+  const availableWidth = window.innerWidth - 28;
+  const availableHeight = window.innerHeight - toolbarHeight - 40;
+
+  const scale = Math.min(
+    1,
+    availableWidth / designWidth,
+    availableHeight / designHeight
+  );
+
+  wrap.style.transform = `scale(${scale})`;
+  wrap.style.width = `${designWidth}px`;
+  wrap.style.height = `${designHeight * scale}px`;
+}
+
+async function renderPosterCanvas() {
+  const poster = document.getElementById("poster");
+
+  if (!poster) {
+    alert("Poster not found.");
+    return null;
+  }
+
+  await document.fonts.ready;
+
+  const wasEditing = editMode;
+  if (wasEditing) {
+    document.body.classList.remove("editing");
+  }
+
+  const clone = poster.cloneNode(true);
+
+  clone.querySelectorAll("[contenteditable]").forEach(el => {
+    el.removeAttribute("contenteditable");
+    el.removeAttribute("spellcheck");
+  });
+
+  const exportContainer = document.createElement("div");
+  exportContainer.style.position = "fixed";
+  exportContainer.style.left = "-10000px";
+  exportContainer.style.top = "0";
+  exportContainer.style.width = "1600px";
+  exportContainer.style.height = "1067px";
+  exportContainer.style.background = "#FFFFFF";
+  exportContainer.style.zIndex = "-1";
+
+  clone.style.transform = "none";
+  clone.style.width = "1600px";
+  clone.style.height = "1067px";
+  clone.style.boxShadow = "none";
+  clone.style.borderRadius = "0";
+
+  exportContainer.appendChild(clone);
+  document.body.appendChild(exportContainer);
+
+  await new Promise(resolve => setTimeout(resolve, 300));
+
+  const canvas = await html2canvas(clone, {
+    backgroundColor: "#FFFFFF",
+    scale: 5,
+    useCORS: true,
+    allowTaint: true,
+    logging: false,
+    width: 1600,
+    height: 1067,
+    scrollX: 0,
+    scrollY: 0
+  });
+
+  document.body.removeChild(exportContainer);
+
+  if (wasEditing) {
+    document.body.classList.add("editing");
+  }
+
+  return canvas;
+}
+
+async function downloadPosterPNG() {
+  const canvas = await renderPosterCanvas();
+  if (!canvas) return;
+
+  const link = document.createElement("a");
+  link.download = "pulse-oximetry-screening-process-high-resolution.png";
+  link.href = canvas.toDataURL("image/png");
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+async function downloadPosterPDF() {
+  const canvas = await renderPosterCanvas();
+  if (!canvas) return;
+
+  const imgData = canvas.toDataURL("image/png");
+
+  if (!window.jspdf || !window.jspdf.jsPDF) {
+    alert("PDF library did not load. Please check internet connection and refresh.");
+    return;
+  }
+
+  const { jsPDF } = window.jspdf;
+
+  const pdf = new jsPDF({
+    orientation: "landscape",
+    unit: "px",
+    format: [1600, 1067]
+  });
+
+  pdf.addImage(imgData, "PNG", 0, 0, 1600, 1067);
+  pdf.save("pulse-oximetry-screening-process-exact.pdf");
+}
+
+function downloadEditedHTML() {
+  const doc = document.documentElement.cloneNode(true);
+
+  doc.querySelectorAll("[contenteditable]").forEach(el => {
+    el.removeAttribute("contenteditable");
+    el.removeAttribute("spellcheck");
+  });
+
+  const body = doc.querySelector("body");
+  if (body) {
+    body.classList.remove("editing");
+  }
+
+  const html = "<!DOCTYPE html>\n" + doc.outerHTML;
+
+  const blob = new Blob([html], { type: "text/html" });
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "pulse-oximetry-screening-process-edited.html";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  URL.revokeObjectURL(url);
+}
+
+window.addEventListener("resize", fitPoster);
+window.addEventListener("load", fitPoster);
+setTimeout(fitPoster, 300);
+setTimeout(fitPoster, 1000);
+</script>
+
+</body>
+</html>
