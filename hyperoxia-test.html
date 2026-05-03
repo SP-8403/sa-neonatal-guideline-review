@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
 :root {
@@ -27,11 +28,11 @@
   --amber-soft-2: #FFF1CF;
   --amber-border: #E7C77A;
 
-  --red: #B8312F;
-  --red-dark: #8F2322;
-  --red-soft: #FFF1F0;
-  --red-soft-2: #FFE4E2;
-  --red-border: #E4A09D;
+  --red: #9F3A38;
+  --red-dark: #7E2E2C;
+  --red-soft: #FFF7F6;
+  --red-soft-2: #FCEBE9;
+  --red-border: #D9A7A4;
 
   --border: #8FA99B;
   --text: #071525;
@@ -283,7 +284,7 @@ li {
 
 .result-card.red {
   border-color: var(--red-border);
-  background: var(--red-soft);
+  background: #FFFDFD;
 }
 
 .result-card .result-head {
@@ -306,8 +307,9 @@ li {
 }
 
 .result-card.red .result-head {
-  background: linear-gradient(180deg, #B8312F 0%, #8F2322 100%);
-  color: #FFFFFF;
+  background: linear-gradient(180deg, #FCEBE9 0%, #F3D2CF 100%);
+  color: var(--red-dark);
+  border-bottom: 1.5px solid var(--red-border);
 }
 
 .result-card .result-body {
@@ -348,8 +350,8 @@ li {
 /* SAFETY PANEL */
 
 .callout {
-  border: 2px dashed var(--red);
-  background: var(--red-soft);
+  border: 1.8px dashed var(--red-border);
+  background: #FFFDFD;
   border-radius: 10px;
   padding: 13px;
   margin-bottom: 12px;
@@ -422,8 +424,8 @@ li {
   right: 10px;
   bottom: 10px;
   height: 36px;
-  background: var(--red-soft);
-  border: 1.8px solid var(--red-border);
+  background: #FFFFFF;
+  border: 1.5px solid var(--red-border);
   border-radius: 7px;
   color: var(--red-dark);
   display: flex;
@@ -439,7 +441,17 @@ li {
   margin-left: 8px;
 }
 
-/* PRINT */
+.imprint {
+  position: absolute;
+  right: 18px;
+  bottom: 91px;
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(31, 63, 49, 0.45);
+  letter-spacing: 0.2px;
+}
+
+/* PRINT FALLBACK */
 
 @media print {
   @page {
@@ -494,7 +506,7 @@ li {
 
 <div class="toolbar">
   <button onclick="downloadPosterPNG()">Download high-resolution PNG</button>
-  <button onclick="window.print()">Print / Save as PDF</button>
+  <button onclick="downloadPosterPDF()">Download exact PDF</button>
 </div>
 
 <div class="viewer">
@@ -652,6 +664,8 @@ li {
 
 </section>
 
+<div class="imprint">National Neonatal Guidelines · South Africa · 2026</div>
+
 <div class="footer-strip">
   Interpret the hyperoxia test with the full clinical assessment. Escalate early when cyanosis persists.
 </div>
@@ -689,12 +703,12 @@ function fitPoster() {
   wrap.style.height = `${designHeight * scale}px`;
 }
 
-async function downloadPosterPNG() {
+async function renderPosterCanvas() {
   const poster = document.getElementById("poster");
 
   if (!poster) {
     alert("Poster not found.");
-    return;
+    return null;
   }
 
   await document.fonts.ready;
@@ -735,12 +749,42 @@ async function downloadPosterPNG() {
 
   document.body.removeChild(exportContainer);
 
+  return canvas;
+}
+
+async function downloadPosterPNG() {
+  const canvas = await renderPosterCanvas();
+  if (!canvas) return;
+
   const link = document.createElement("a");
   link.download = "hyperoxia-test-cyanotic-newborn-high-resolution.png";
   link.href = canvas.toDataURL("image/png");
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
+}
+
+async function downloadPosterPDF() {
+  const canvas = await renderPosterCanvas();
+  if (!canvas) return;
+
+  const imgData = canvas.toDataURL("image/png");
+
+  if (!window.jspdf || !window.jspdf.jsPDF) {
+    alert("PDF library did not load. Please check internet connection and refresh.");
+    return;
+  }
+
+  const { jsPDF } = window.jspdf;
+
+  const pdf = new jsPDF({
+    orientation: "landscape",
+    unit: "px",
+    format: [1600, 1067]
+  });
+
+  pdf.addImage(imgData, "PNG", 0, 0, 1600, 1067);
+  pdf.save("hyperoxia-test-cyanotic-newborn-exact.pdf");
 }
 
 window.addEventListener("resize", fitPoster);
