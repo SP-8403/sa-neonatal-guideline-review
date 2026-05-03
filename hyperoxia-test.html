@@ -81,6 +81,17 @@ body {
   background: var(--green-soft);
 }
 
+.editing .poster [contenteditable="true"] {
+  outline: 2px dashed rgba(44, 84, 64, 0.35);
+  outline-offset: 2px;
+  cursor: text;
+}
+
+.editing .poster [contenteditable="true"]:focus {
+  outline: 2px solid #2C5440;
+  background: rgba(232, 243, 239, 0.55);
+}
+
 .viewer {
   padding: 14px 14px 140px 14px;
   overflow: auto;
@@ -505,6 +516,7 @@ li {
 <body>
 
 <div class="toolbar">
+  <button onclick="toggleEditMode()">Edit text live</button>
   <button onclick="downloadPosterPNG()">Download high-resolution PNG</button>
   <button onclick="downloadPosterPDF()">Download exact PDF</button>
 </div>
@@ -640,13 +652,13 @@ li {
       </div>
 
       <div class="side-note">
-        <h3>Stabilisation is the priority</h3>
-        <p>Continue support of airway and breathing,monitoring of pre-ductal saturation, glucose, temperature and perfusion while awaiting transfer.</p>
+        <h3>Do not delay stabilisation</h3>
+        <p>Continue airway and breathing support, pre-ductal saturation monitoring, glucose correction, temperature control and perfusion assessment while awaiting transfer.</p>
       </div>
 
       <div class="side-note">
-        <h3>Consider sepsis</h3>
-        <p>If cyanosis persists n, and the baby is unwell, take a blood culture and start broad-spectrum antibiotics according to local neonatal sepsis guidance.</p>
+        <h3>Consider sepsis if clinically indicated</h3>
+        <p>If cyanosis persists despite adequate ventilation and oxygenation, and the baby is unwell, take a blood culture where feasible and start broad-spectrum antibiotics according to local neonatal sepsis guidance.</p>
       </div>
 
       <div class="info-box">
@@ -667,12 +679,12 @@ li {
 <div class="imprint">National Neonatal Guidelines · South Africa · 2026</div>
 
 <div class="footer-strip">
-  Interpret the hyperoxia test with the clinical assessment. Escalate early if cyanosis persists.
+  Interpret the hyperoxia test with the full clinical assessment. Escalate early when cyanosis persists.
 </div>
 
 <div class="alert-strip">
   URGENT REFERRAL:
-  <span>Unstable cyanotic neonates require urgent discussion with the referral centre for possible transfer</span>
+  <span>Unstable cyanotic neonates require urgent discussion and transfer planning.</span>
 </div>
 
 </main>
@@ -681,6 +693,46 @@ li {
 </div>
 
 <script>
+let editMode = false;
+
+function toggleEditMode() {
+  editMode = !editMode;
+
+  document.body.classList.toggle("editing", editMode);
+
+  const editableSelectors = [
+    ".header h1",
+    ".header p",
+    ".panel-title",
+    ".info-box h3",
+    ".info-box p",
+    ".step-card h3",
+    ".step-card p",
+    ".result-head",
+    ".value-row div",
+    ".callout h3",
+    ".callout p",
+    ".side-note h3",
+    ".side-note p",
+    ".info-box li",
+    ".footer-strip",
+    ".alert-strip",
+    ".imprint"
+  ];
+
+  editableSelectors.forEach(selector => {
+    document.querySelectorAll(selector).forEach(el => {
+      el.setAttribute("contenteditable", editMode ? "true" : "false");
+      el.setAttribute("spellcheck", "true");
+    });
+  });
+
+  const button = document.querySelector("button[onclick='toggleEditMode()']");
+  if (button) {
+    button.textContent = editMode ? "Lock text" : "Edit text live";
+  }
+}
+
 function fitPoster() {
   const wrap = document.getElementById("posterWrap");
   const designWidth = 1600;
@@ -714,6 +766,11 @@ async function renderPosterCanvas() {
   await document.fonts.ready;
 
   const clone = poster.cloneNode(true);
+
+  clone.querySelectorAll("[contenteditable]").forEach(el => {
+    el.removeAttribute("contenteditable");
+    el.removeAttribute("spellcheck");
+  });
 
   const exportContainer = document.createElement("div");
   exportContainer.style.position = "fixed";
