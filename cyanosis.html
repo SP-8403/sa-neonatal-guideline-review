@@ -20,9 +20,12 @@
   --cream: #FFFBEA;
   --cream-border: #D8D1A6;
   --red: #D90000;
+  --red-dark: #B90000;
+  --red-soft: #FFF6F6;
   --border: #8FA99B;
   --text: #071525;
   --navy: #101329;
+  --white: #FFFFFF;
 }
 
 * {
@@ -36,7 +39,6 @@ body {
   background: #EEF3F0;
   font-family: "Source Sans 3", "Source Sans Pro", Arial, sans-serif;
   color: var(--text);
-  overflow: hidden;
 }
 
 .toolbar {
@@ -68,16 +70,12 @@ body {
 }
 
 .viewer {
-  padding: 10px;
-  overflow: hidden;
-  height: calc(100vh - 54px);
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  padding: 14px;
+  overflow: auto;
 }
 
 .poster-wrap {
-  transform-origin: top center;
+  transform-origin: top left;
 }
 
 .poster {
@@ -273,6 +271,10 @@ body {
   color: white;
   margin: 0 auto;
   box-shadow: inset 0 2px 4px rgba(255,255,255,0.22), 0 1px 3px rgba(0,0,0,0.18);
+}
+
+.icon-circle.red {
+  background: radial-gradient(circle at 35% 25%, #F00000 0%, #D90000 48%, #B80000 100%);
 }
 
 .icon-circle svg {
@@ -661,14 +663,11 @@ li {
   html,
   body {
     background: white;
-    overflow: visible;
   }
 
   .viewer {
     padding: 0;
     overflow: visible;
-    height: auto;
-    display: block;
   }
 
   .poster-wrap {
@@ -677,7 +676,7 @@ li {
 
   .poster {
     width: 297mm;
-    height: 198mm;
+    height: 210mm;
     box-shadow: none;
     border-radius: 0;
     border: none;
@@ -1074,47 +1073,20 @@ li {
 <script>
 function fitPoster() {
   const wrap = document.getElementById("posterWrap");
-  if (!wrap) return;
-
   const designWidth = 1600;
   const designHeight = 1067;
+  const availableWidth = window.innerWidth - 28;
+  const scale = Math.min(1, availableWidth / designWidth);
 
-  const toolbar = document.querySelector(".toolbar");
-  const toolbarHeight = toolbar ? toolbar.offsetHeight : 0;
-
-  const availableWidth = window.innerWidth - 24;
-  const availableHeight = window.innerHeight - toolbarHeight - 24;
-
-  const scaleByWidth = availableWidth / designWidth;
-  const scaleByHeight = availableHeight / designHeight;
-
-  const scale = Math.min(1, scaleByWidth, scaleByHeight);
-
-  wrap.style.transform = "scale(" + scale + ")";
-  wrap.style.width = designWidth + "px";
-  wrap.style.height = (designHeight * scale) + "px";
+  wrap.style.transform = `scale(${scale})`;
+  wrap.style.width = `${designWidth}px`;
+  wrap.style.height = `${designHeight * scale}px`;
 }
 
 async function downloadPosterPNG() {
   const poster = document.getElementById("poster");
-  const wrap = document.getElementById("posterWrap");
-
-  if (!poster || !wrap) {
-    alert("Poster not found.");
-    return;
-  }
 
   await document.fonts.ready;
-
-  const oldTransform = wrap.style.transform;
-  const oldHeight = wrap.style.height;
-  const oldBodyOverflow = document.body.style.overflow;
-
-  wrap.style.transform = "scale(1)";
-  wrap.style.height = "1067px";
-  document.body.style.overflow = "visible";
-
-  await new Promise(resolve => setTimeout(resolve, 250));
 
   const canvas = await html2canvas(poster, {
     backgroundColor: "#FFFFFF",
@@ -1122,16 +1094,11 @@ async function downloadPosterPNG() {
     useCORS: true,
     allowTaint: true,
     logging: false,
-    width: 1600,
-    height: 1067,
+    width: poster.offsetWidth,
+    height: poster.offsetHeight,
     scrollX: 0,
     scrollY: 0
   });
-
-  wrap.style.transform = oldTransform;
-  wrap.style.height = oldHeight;
-  document.body.style.overflow = oldBodyOverflow;
-  fitPoster();
 
   const link = document.createElement("a");
   link.download = "cyanosis-newborn-algorithm-high-resolution.png";
@@ -1139,10 +1106,8 @@ async function downloadPosterPNG() {
   link.click();
 }
 
-window.addEventListener("load", fitPoster);
 window.addEventListener("resize", fitPoster);
-setTimeout(fitPoster, 300);
-setTimeout(fitPoster, 1000);
+window.addEventListener("load", fitPoster);
 </script>
 
 </body>
