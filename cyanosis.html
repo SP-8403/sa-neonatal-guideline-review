@@ -3,1146 +3,534 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Evaluation and Management of Cyanosis in the Newborn</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<title>Cyanosis in the Newborn Algorithm</title>
 
 <style>
-:root {
-  --green: #2C5440;
-  --green-dark: #004727;
-  --green-deep: #00391F;
-  --green-pale: #E8F3EF;
-  --cream: #FFFBEA;
-  --cream-border: #D8D1A6;
-  --red: #D90000;
-  --border: #8FA99B;
-  --text: #071525;
-  --navy: #101329;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  margin: 0;
-  padding: 0;
-  background: #EEF3F0;
-  font-family: "Source Sans 3", "Source Sans Pro", Arial, sans-serif;
-  color: var(--text);
-  overflow: hidden;
-}
-
-.toolbar {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background: #0B2F1E;
-  padding: 10px 16px;
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
-}
-
-.toolbar button {
-  border: none;
-  background: #FFFFFF;
-  color: #0B2F1E;
-  font-family: inherit;
-  font-weight: 900;
-  font-size: 14px;
-  padding: 8px 14px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.toolbar button:hover {
-  background: var(--green-pale);
-}
-
-.viewer {
-  padding: 10px;
-  overflow: hidden;
-  height: calc(100vh - 54px);
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-.poster-wrap {
-  transform-origin: top center;
-}
-
-.poster {
-  width: 1600px;
-  height: 1067px;
-  background: #FFFFFF;
-  border: 1.5px solid var(--border);
-  border-radius: 10px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 12px 38px rgba(0,0,0,0.18);
-}
-
-.columns {
-  position: absolute;
-  top: 6px;
-  left: 8px;
-  right: 8px;
-  bottom: 113px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-
-.column {
-  border: 1.5px solid var(--border);
-  border-radius: 9px;
-  background: #FBFCFC;
-  overflow: hidden;
-}
-
-.column-header {
-  height: 78px;
-  background: linear-gradient(180deg, #064D2D 0%, #00351D 100%);
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  line-height: 1.02;
-  text-align: center;
-  font-weight: 900;
-  letter-spacing: 0.4px;
-}
-
-.column-header .algorithm {
-  font-size: 30px;
-}
-
-.column-header .subtitle {
-  font-size: 25px;
-}
-
-.column-body {
-  padding: 12px 10px 10px 10px;
-}
-
-.step-title {
-  background: var(--cream);
-  border: 1.3px solid var(--cream-border);
-  border-radius: 8px;
-  color: #0B3322;
-  text-align: center;
-  font-size: 21px;
-  font-weight: 900;
-  padding: 7px 10px;
-  margin-bottom: 11px;
-}
-
-.two-col {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
-.type-card {
-  min-height: 242px;
-  background: #FFFFFF;
-  border: 1.4px solid #7EA18E;
-  border-radius: 8px;
-  overflow: hidden;
-  text-align: center;
-  position: relative;
-}
-
-.type-card h3 {
-  margin: 0;
-  padding: 10px 6px;
-  background: linear-gradient(180deg, #05532F 0%, #00381F 100%);
-  color: white;
-  font-size: 20px;
-  font-weight: 900;
-}
-
-.type-card p {
-  margin: 14px 16px;
-  font-size: 17px;
-  line-height: 1.28;
-  font-weight: 750;
-}
-
-.large-icon {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 20px;
-  color: var(--green-dark);
-}
-
-.large-icon svg {
-  width: 92px;
-  height: 72px;
-}
-
-.arrow {
-  height: 25px;
-  position: relative;
-}
-
-.arrow::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  height: 20px;
-  border-left: 2px solid #111;
-}
-
-.arrow::after {
-  content: "";
-  position: absolute;
-  left: calc(50% - 5px);
-  top: 18px;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 8px solid #111;
-}
-
-.observe-box {
-  margin-left: 247px;
-  background: #FFFFFF;
-  border: 1.3px solid #A8B8B2;
-  border-radius: 8px;
-  text-align: center;
-  padding: 7px 10px;
-  font-size: 18px;
-  font-weight: 850;
-}
-
-.action-card,
-.assessment-card,
-.hyperoxia-card {
-  background: #FFFFFF;
-  border: 1.3px solid #AABAB4;
-  border-radius: 8px;
-  display: grid;
-  grid-template-columns: 76px 1fr;
-  gap: 7px;
-  padding: 10px 12px;
-}
-
-.action-card {
-  min-height: 100px;
-}
-
-.assessment-card.history {
-  min-height: 154px;
-  margin-bottom: 11px;
-}
-
-.assessment-card.exam {
-  min-height: 168px;
-  margin-bottom: 11px;
-}
-
-.assessment-card.oximetry {
-  min-height: 112px;
-  margin-bottom: 8px;
-}
-
-.hyperoxia-card {
-  min-height: 92px;
-}
-
-.icon-circle {
-  width: 62px;
-  height: 62px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 25%, #0B6C38 0%, #005C2E 48%, #003C21 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  margin: 0 auto;
-  box-shadow: inset 0 2px 4px rgba(255,255,255,0.22), 0 1px 3px rgba(0,0,0,0.18);
-}
-
-.icon-circle svg {
-  width: 40px;
-  height: 40px;
-}
-
-.small-circle {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: inset 0 2px 4px rgba(255,255,255,0.22), 0 1px 3px rgba(0,0,0,0.16);
-}
-
-.small-circle.red {
-  background: radial-gradient(circle at 35% 25%, #F00000 0%, #D90000 52%, #B80000 100%);
-}
-
-.small-circle.green {
-  background: radial-gradient(circle at 35% 25%, #0B6C38 0%, #005C2E 52%, #003C21 100%);
-}
-
-.small-circle svg {
-  width: 26px;
-  height: 26px;
-}
-
-.card-title {
-  margin: 0 0 4px 0;
-  color: var(--navy);
-  font-size: 21px;
-  line-height: 1.05;
-  font-weight: 900;
-}
-
-ul {
-  margin: 0;
-  padding-left: 21px;
-}
-
-li {
-  font-size: 16px;
-  line-height: 1.22;
-  margin: 4px 0;
-  font-weight: 700;
-}
-
-.proceed {
-  background: linear-gradient(180deg, #064D2D 0%, #00351D 100%);
-  color: white;
-  border-radius: 8px;
-  text-align: center;
-  padding: 9px 10px;
-  font-size: 22px;
-  line-height: 1.05;
-  font-weight: 900;
-}
-
-.proceed span {
-  font-size: 16px;
-}
-
-.abnormal-box {
-  border: 2px dashed var(--red);
-  border-radius: 10px;
-  background: #FFFFFF;
-  text-align: center;
-  padding: 12px 10px;
-  min-height: 120px;
-  margin: 0 4px 8px 4px;
-}
-
-.abnormal-box h3 {
-  margin: 0 0 5px 0;
-  color: var(--red);
-  font-size: 22px;
-  font-weight: 900;
-}
-
-.abnormal-box p {
-  margin: 0;
-  font-size: 18px;
-  line-height: 1.33;
-  font-weight: 800;
-}
-
-.hyperoxia-card p {
-  margin: 7px 0 0 0;
-  font-size: 18px;
-  line-height: 1.22;
-  font-weight: 750;
-}
-
-.top-icons {
-  height: 62px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  text-align: center;
-  margin-bottom: 9px;
-}
-
-.top-circle {
-  width: 62px;
-  height: 62px;
-  border-radius: 50%;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  box-shadow: inset 0 2px 4px rgba(255,255,255,0.22), 0 1px 3px rgba(0,0,0,0.16);
-}
-
-.top-circle.red {
-  background: radial-gradient(circle at 35% 25%, #F00000 0%, #D90000 50%, #B80000 100%);
-}
-
-.top-circle.green {
-  background: radial-gradient(circle at 35% 25%, #0B6C38 0%, #005C2E 50%, #003C21 100%);
-}
-
-.top-circle svg {
-  width: 44px;
-  height: 44px;
-}
-
-.cause-grid,
-.management-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
-.cause-grid {
-  margin-bottom: 10px;
-}
-
-.cause-card {
-  background: white;
-  border-radius: 8px;
-  overflow: hidden;
-  min-height: 268px;
-}
-
-.cause-card.red {
-  border: 1.4px solid #F04B4B;
-}
-
-.cause-card.green {
-  border: 1.4px solid #7EA18E;
-}
-
-.cause-card h3 {
-  margin: 0;
-  padding: 10px 8px;
-  background: white;
-  text-align: center;
-  font-size: 20px;
-  line-height: 1.12;
-  font-weight: 900;
-}
-
-.cause-card.red h3 {
-  color: var(--red);
-  border-bottom: 1.4px solid #F04B4B;
-}
-
-.cause-card.green h3 {
-  color: #0B3322;
-  border-bottom: 1.4px solid #7EA18E;
-}
-
-.cause-card ul {
-  padding: 9px 16px 8px 27px;
-}
-
-.cause-card li {
-  font-size: 15.8px;
-  line-height: 1.2;
-  margin: 8px 0;
-}
-
-.cause-card.red li::marker {
-  color: var(--red);
-}
-
-.cause-card.green li::marker {
-  color: var(--green-dark);
-}
-
-.management-card {
-  background: white;
-  border-radius: 8px;
-  overflow: hidden;
-  min-height: 314px;
-}
-
-.management-card.red {
-  border: 1.4px solid #F04B4B;
-}
-
-.management-card.green {
-  border: 1.4px solid #7EA18E;
-}
-
-.management-title {
-  color: white;
-  text-align: center;
-  font-size: 21px;
-  font-weight: 900;
-  padding: 9px 8px;
-}
-
-.management-card.red .management-title {
-  background: linear-gradient(180deg, #E60000 0%, #C70000 100%);
-}
-
-.management-card.green .management-title {
-  background: linear-gradient(180deg, #076B38 0%, #004222 100%);
-}
-
-.management-row {
-  display: grid;
-  grid-template-columns: 53px 1fr;
-  gap: 8px;
-  align-items: start;
-  padding: 8px 10px 4px 10px;
-}
-
-.management-row p {
-  margin: 0;
-  font-size: 15.6px;
-  line-height: 1.16;
-  font-weight: 700;
-}
-
-.supportive-care {
-  margin-top: 10px;
-  background: var(--cream);
-  border: 1.3px solid #AABAB4;
-  border-radius: 8px;
-  display: grid;
-  grid-template-columns: 80px 1fr;
-  gap: 10px;
-  min-height: 100px;
-  padding: 10px 12px;
-}
-
-.supportive-care h3 {
-  margin: 0;
-  color: #0B3322;
-  font-size: 21px;
-  font-weight: 900;
-}
-
-.supportive-care p {
-  margin: 2px 0 0 0;
-  font-size: 17px;
-  line-height: 1.18;
-  font-weight: 700;
-}
-
-.bridge-arrow {
-  position: absolute;
-  left: 1034px;
-  top: 577px;
-  width: 28px;
-  border-top: 2px solid #111;
-  z-index: 20;
-}
-
-.bridge-arrow::after {
-  content: "";
-  position: absolute;
-  right: -1px;
-  top: -6px;
-  border-left: 8px solid #111;
-  border-top: 6px solid transparent;
-  border-bottom: 6px solid transparent;
-}
-
-.referral-strip {
-  position: absolute;
-  left: 8px;
-  right: 8px;
-  bottom: 38px;
-  height: 70px;
-  background: white;
-  border: 1.7px solid #F04B4B;
-  border-radius: 8px;
-  display: grid;
-  grid-template-columns: 110px 1fr;
-  align-items: center;
-  padding: 6px 12px;
-}
-
-.warning-triangle {
-  width: 76px;
-  height: 64px;
-  background: var(--red);
-  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
-  color: white;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: 8px;
-  font-size: 44px;
-  font-weight: 900;
-  margin-left: 12px;
-}
-
-.referral-strip h3 {
-  margin: 0 0 4px 0;
-  color: var(--red);
-  font-size: 20px;
-  line-height: 1;
-  font-weight: 900;
-  letter-spacing: 0.35px;
-}
-
-.referral-items {
-  display: grid;
-  grid-template-columns: 1.12fr 1.52fr 1.25fr 1fr 0.92fr 1fr;
-  gap: 10px;
-}
-
-.referral-item {
-  border-left: 2px solid #E57D7D;
-  padding-left: 13px;
-  font-size: 15.7px;
-  line-height: 1.05;
-  font-weight: 850;
-}
-
-.referral-item:first-child {
-  border-left: none;
-  padding-left: 0;
-}
-
-.referral-item::before {
-  content: "•";
-  color: var(--red);
-  font-size: 22px;
-  margin-right: 7px;
-}
-
-.footer-strip {
-  position: absolute;
-  left: 8px;
-  right: 8px;
-  bottom: 7px;
-  height: 27px;
-  background: var(--green-pale);
-  border: 1.2px solid var(--border);
-  border-radius: 6px;
-  color: #143924;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 19.5px;
-  font-weight: 900;
-}
-
-.footer-strip svg {
-  width: 22px;
-  height: 22px;
-  margin-right: 10px;
-  color: var(--green-dark);
-}
-
-@media print {
-  @page {
-    size: A4 landscape;
+  :root {
+    --green: #2C5440;
+    --dark-green: #00391F;
+    --mid-green: #005C2E;
+    --pale-green: #E8F3EF;
+    --cream: #FFFBEA;
+    --cream-border: #D8D1A6;
+    --red: #D90000;
+    --text: #071525;
+    --border: #8FA99B;
+  }
+
+  html, body {
     margin: 0;
+    padding: 0;
+    background: #EEF3F0;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: hidden;
   }
 
   .toolbar {
-    display: none;
+    height: 52px;
+    background: #0B2F1E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.25);
   }
 
-  html,
-  body {
-    background: white;
-    overflow: visible;
-  }
-
-  .viewer {
-    padding: 0;
-    overflow: visible;
-    height: auto;
-    display: block;
-  }
-
-  .poster-wrap {
-    transform: none !important;
-  }
-
-  .poster {
-    width: 297mm;
-    height: 198mm;
-    box-shadow: none;
-    border-radius: 0;
+  .toolbar button {
     border: none;
+    border-radius: 8px;
+    background: white;
+    color: #0B2F1E;
+    font-weight: 800;
+    font-size: 14px;
+    padding: 9px 16px;
+    cursor: pointer;
   }
-}
+
+  .stage {
+    height: calc(100vh - 52px);
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+
+  #poster {
+    width: min(calc(100vw - 16px), calc((100vh - 68px) * 1600 / 1067));
+    height: auto;
+    max-height: calc(100vh - 68px);
+    background: white;
+    box-shadow: 0 10px 34px rgba(0,0,0,0.2);
+    border-radius: 10px;
+  }
+
+  @media print {
+    .toolbar { display: none; }
+    .stage { height: 100vh; padding: 0; }
+    #poster {
+      width: 100vw;
+      max-height: 100vh;
+      box-shadow: none;
+      border-radius: 0;
+    }
+  }
 </style>
 </head>
 
 <body>
 
 <div class="toolbar">
-  <button onclick="downloadPosterPNG()">Download high-resolution PNG</button>
+  <button onclick="downloadPNG()">Download high-resolution PNG</button>
   <button onclick="window.print()">Print / Save as PDF</button>
 </div>
 
-<svg width="0" height="0" style="position:absolute">
+<div class="stage">
 
-  <symbol id="icon-lungs-solid" viewBox="0 0 64 64">
-    <path d="M30 7h4v22c4-8 10-15 18-14 8 1 11 10 11 23 0 13-5 22-14 22-8 0-13-8-16-20v20h-2V40c-3 12-8 20-16 20C6 60 1 51 1 38 1 25 4 16 12 15c8-1 14 6 18 14V7z"/>
-    <path d="M32 8v25" stroke="white" stroke-width="3" stroke-linecap="round" fill="none"/>
+<svg id="poster" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1067">
+
+<style>
+  .font { font-family: Arial, Helvetica, sans-serif; }
+  .header1 { font-size: 29px; font-weight: 900; fill: #ffffff; letter-spacing: 0.5px; }
+  .header2 { font-size: 24px; font-weight: 900; fill: #ffffff; letter-spacing: 0.3px; }
+  .step { font-size: 20px; font-weight: 900; fill: #00391F; }
+  .boxhead { font-size: 18px; font-weight: 900; fill: #ffffff; }
+  .title { font-size: 19px; font-weight: 900; fill: #101329; }
+  .body { font-size: 14.5px; font-weight: 700; fill: #071525; }
+  .bodySmall { font-size: 13.5px; font-weight: 700; fill: #071525; }
+  .redTitle { font-size: 19px; font-weight: 900; fill: #D90000; }
+  .greenTitle { font-size: 19px; font-weight: 900; fill: #00391F; }
+  .footer { font-size: 19px; font-weight: 900; fill: #00391F; }
+</style>
+
+<defs>
+  <linearGradient id="headerGreen" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#064D2D"/>
+    <stop offset="100%" stop-color="#00351D"/>
+  </linearGradient>
+
+  <radialGradient id="greenIcon" cx="35%" cy="25%" r="70%">
+    <stop offset="0%" stop-color="#0B6C38"/>
+    <stop offset="55%" stop-color="#005C2E"/>
+    <stop offset="100%" stop-color="#003C21"/>
+  </radialGradient>
+
+  <radialGradient id="redIcon" cx="35%" cy="25%" r="70%">
+    <stop offset="0%" stop-color="#F00000"/>
+    <stop offset="55%" stop-color="#D90000"/>
+    <stop offset="100%" stop-color="#B80000"/>
+  </radialGradient>
+
+  <symbol id="icon-lungs" viewBox="0 0 64 64">
+    <path d="M30 7h4v21c5-9 11-14 18-13 8 1 11 10 11 23 0 13-5 22-14 22-8 0-13-8-16-20v20h-2V40c-3 12-8 20-16 20C6 60 1 51 1 38 1 25 4 16 12 15c7-1 13 4 18 13V7z" fill="currentColor"/>
+    <path d="M32 8v25" stroke="white" stroke-width="3" stroke-linecap="round"/>
   </symbol>
 
-  <symbol id="icon-lips-solid" viewBox="0 0 90 64">
-    <path d="M5 33c12-13 23-21 36-11 3 2 5 2 8 0 13-10 24-2 36 11-13 13-27 19-40 19S18 46 5 33z"/>
+  <symbol id="icon-heart" viewBox="0 0 64 64">
+    <path d="M32 57S7 42 7 23c0-9 6-16 15-16 5 0 9 3 10 7 1-4 5-7 10-7 9 0 15 7 15 16 0 19-25 34-25 34z" fill="currentColor"/>
+    <path d="M13 31h10l4-10 8 24 5-16h11" fill="none" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+
+  <symbol id="icon-lips" viewBox="0 0 90 64">
+    <path d="M5 33c12-13 23-21 36-11 3 2 5 2 8 0 13-10 24-2 36 11-13 13-27 19-40 19S18 46 5 33z" fill="currentColor"/>
     <path d="M9 33h72" stroke="white" stroke-width="4" stroke-linecap="round"/>
-    <path d="M41 22c-8 7-17 10-32 11M49 22c8 7 17 10 32 11" stroke="white" stroke-width="3" stroke-linecap="round" fill="none"/>
   </symbol>
 
-  <symbol id="icon-hand-foot-solid" viewBox="0 0 120 70">
-    <path d="M20 64c-10 0-16-6-16-16V31c0-5 7-6 8 0v17h3V21c0-6 8-6 8 0v26h3V15c0-6 8-6 8 0v32h3V24c0-6 8-6 8 0v27c4-7 12-6 11 2-2 8-11 11-15 11H20z"/>
-    <path d="M75 58c-9-3-13-8-13-18 0-14 7-32 18-32 12 0 21 18 22 32 1 15-13 25-27 18z"/>
-    <circle cx="74" cy="7" r="4"/>
-    <circle cx="83" cy="6" r="4"/>
-    <circle cx="92" cy="9" r="4"/>
-    <circle cx="101" cy="15" r="4"/>
-    <circle cx="108" cy="24" r="4"/>
+  <symbol id="icon-handfoot" viewBox="0 0 120 70">
+    <path d="M20 64c-10 0-16-6-16-16V31c0-5 7-6 8 0v17h3V21c0-6 8-6 8 0v26h3V15c0-6 8-6 8 0v32h3V24c0-6 8-6 8 0v27c4-7 12-6 11 2-2 8-11 11-15 11H20z" fill="currentColor"/>
+    <path d="M75 58c-9-3-13-8-13-18 0-14 7-32 18-32 12 0 21 18 22 32 1 15-13 25-27 18z" fill="currentColor"/>
+    <circle cx="74" cy="7" r="4" fill="currentColor"/>
+    <circle cx="83" cy="6" r="4" fill="currentColor"/>
+    <circle cx="92" cy="9" r="4" fill="currentColor"/>
+    <circle cx="101" cy="15" r="4" fill="currentColor"/>
+    <circle cx="108" cy="24" r="4" fill="currentColor"/>
   </symbol>
 
-  <symbol id="icon-droplet-solid" viewBox="0 0 64 64">
-    <path d="M32 4C21 20 13 31 13 43c0 11 8 18 19 18s19-7 19-18C51 31 43 20 32 4z"/>
-    <path d="M24 44c0 5 4 9 9 9" stroke="white" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.8"/>
+  <symbol id="icon-drop" viewBox="0 0 64 64">
+    <path d="M32 4C21 20 13 31 13 43c0 11 8 18 19 18s19-7 19-18C51 31 43 20 32 4z" fill="currentColor"/>
   </symbol>
 
-  <symbol id="icon-monitor-solid" viewBox="0 0 64 64">
-    <rect x="7" y="12" width="50" height="34" rx="5"/>
+  <symbol id="icon-monitor" viewBox="0 0 64 64">
+    <rect x="7" y="12" width="50" height="34" rx="5" fill="currentColor"/>
     <rect x="12" y="17" width="40" height="22" rx="2" fill="white"/>
     <path d="M15 30h8l4-8 7 15 5-8h9" stroke="#005C2E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-    <path d="M25 55h14M32 46v9" stroke="white" stroke-width="5" stroke-linecap="round"/>
+    <path d="M25 55h14M32 46v9" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
   </symbol>
 
-  <symbol id="icon-clipboard-solid" viewBox="0 0 64 64">
-    <rect x="14" y="9" width="36" height="49" rx="5"/>
+  <symbol id="icon-clipboard" viewBox="0 0 64 64">
+    <rect x="14" y="9" width="36" height="49" rx="5" fill="currentColor"/>
     <rect x="22" y="5" width="20" height="11" rx="3" fill="white"/>
     <path d="M23 27h18M23 36h18M23 45h12" stroke="white" stroke-width="4" stroke-linecap="round"/>
   </symbol>
 
-  <symbol id="icon-stethoscope-solid" viewBox="0 0 64 64">
-    <path d="M16 8h8v6h-3v13c0 7 5 12 11 12s11-5 11-12V14h-3V8h8v19c0 12-8 21-18 21S12 39 12 27V8h4z"/>
+  <symbol id="icon-steth" viewBox="0 0 64 64">
+    <path d="M16 8h8v6h-3v13c0 7 5 12 11 12s11-5 11-12V14h-3V8h8v19c0 12-8 21-18 21S12 39 12 27V8h4z" fill="currentColor"/>
     <path d="M32 46v3c0 6 5 11 11 11 7 0 12-5 12-12" stroke="white" stroke-width="5" stroke-linecap="round" fill="none"/>
     <circle cx="55" cy="45" r="6" fill="white"/>
-    <circle cx="55" cy="45" r="3" fill="#005C2E"/>
   </symbol>
 
-  <symbol id="icon-oximeter-solid" viewBox="0 0 64 64">
-    <rect x="16" y="6" width="32" height="52" rx="8"/>
+  <symbol id="icon-ox" viewBox="0 0 64 64">
+    <rect x="16" y="6" width="32" height="52" rx="8" fill="currentColor"/>
     <rect x="22" y="15" width="20" height="14" rx="2" fill="white"/>
     <path d="M24 38h16M24 46h9" stroke="white" stroke-width="4" stroke-linecap="round"/>
     <circle cx="39" cy="46" r="3" fill="white"/>
   </symbol>
 
-  <symbol id="icon-heart-solid" viewBox="0 0 64 64">
-    <path d="M32 57S7 42 7 23c0-9 6-16 15-16 5 0 9 3 10 7 1-4 5-7 10-7 9 0 15 7 15 16 0 19-25 34-25 34z"/>
-    <path d="M13 31h10l4-10 8 24 5-16h11" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <symbol id="icon-phone" viewBox="0 0 64 64">
+    <path d="M22 10l8 13-7 6c4 8 8 12 16 16l6-7 13 8c-1 8-7 13-15 12C24 55 9 40 6 21 5 13 10 7 18 6l4 4z" fill="currentColor"/>
   </symbol>
 
-  <symbol id="icon-phone-solid" viewBox="0 0 64 64">
-    <path d="M22 10l8 13-7 6c4 8 8 12 16 16l6-7 13 8c-1 8-7 13-15 12C24 55 9 40 6 21 5 13 10 7 18 6l4 4z"/>
-    <path d="M43 17c4 1 7 4 8 8M42 7c10 2 18 10 20 20" stroke="white" stroke-width="4" stroke-linecap="round" fill="none"/>
-  </symbol>
-
-  <symbol id="icon-syringe-solid" viewBox="0 0 64 64">
-    <path d="M45 6l13 13-5 5-13-13 5-5zM19 46l22-22 8 8-22 22H19v-8z"/>
+  <symbol id="icon-syringe" viewBox="0 0 64 64">
+    <path d="M45 6l13 13-5 5-13-13 5-5zM19 46l22-22 8 8-22 22H19v-8z" fill="currentColor"/>
     <path d="M11 56l10-10M35 18l11 11" stroke="white" stroke-width="4" stroke-linecap="round"/>
   </symbol>
 
-  <symbol id="icon-ambulance-solid" viewBox="0 0 64 64">
-    <path d="M7 24h34v21H7zM41 31h10l7 8v6H41z"/>
+  <symbol id="icon-ambulance" viewBox="0 0 64 64">
+    <path d="M7 24h34v21H7zM41 31h10l7 8v6H41z" fill="currentColor"/>
     <path d="M20 20v15M13 27h14" stroke="white" stroke-width="4" stroke-linecap="round"/>
     <circle cx="20" cy="49" r="6" fill="white"/>
     <circle cx="49" cy="49" r="6" fill="white"/>
-    <circle cx="20" cy="49" r="3" fill="#D90000"/>
-    <circle cx="49" cy="49" r="3" fill="#D90000"/>
   </symbol>
 
-  <symbol id="icon-shield-solid" viewBox="0 0 64 64">
-    <path d="M32 5l23 8v16c0 16-9 26-23 31C18 55 9 45 9 29V13l23-8z"/>
+  <symbol id="icon-shield" viewBox="0 0 64 64">
+    <path d="M32 5l23 8v16c0 16-9 26-23 31C18 55 9 45 9 29V13l23-8z" fill="currentColor"/>
     <path d="M22 33l7 7 16-18" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
   </symbol>
 
-  <symbol id="icon-thermometer-solid" viewBox="0 0 64 64">
-    <path d="M26 36V12a8 8 0 0 1 16 0v24a16 16 0 1 1-16 0z"/>
+  <symbol id="icon-thermo" viewBox="0 0 64 64">
+    <path d="M26 36V12a8 8 0 0 1 16 0v24a16 16 0 1 1-16 0z" fill="currentColor"/>
     <path d="M34 17v26" stroke="white" stroke-width="5" stroke-linecap="round"/>
   </symbol>
 
-  <symbol id="icon-checklist-solid" viewBox="0 0 64 64">
-    <rect x="13" y="8" width="38" height="50" rx="6"/>
+  <symbol id="icon-check" viewBox="0 0 64 64">
+    <rect x="13" y="8" width="38" height="50" rx="6" fill="currentColor"/>
     <path d="M23 26l4 4 9-10M23 42l4 4 9-10" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
   </symbol>
+</defs>
+
+<!-- background -->
+<rect width="1600" height="1067" rx="10" fill="white"/>
+
+<!-- columns -->
+<g class="font">
+  <rect x="8" y="6" width="520" height="944" rx="8" fill="#FBFCFC" stroke="#8FA99B"/>
+  <rect x="540" y="6" width="520" height="944" rx="8" fill="#FBFCFC" stroke="#8FA99B"/>
+  <rect x="1072" y="6" width="520" height="944" rx="8" fill="#FBFCFC" stroke="#8FA99B"/>
+
+  <rect x="8" y="6" width="520" height="78" rx="8" fill="url(#headerGreen)"/>
+  <rect x="540" y="6" width="520" height="78" rx="8" fill="url(#headerGreen)"/>
+  <rect x="1072" y="6" width="520" height="78" rx="8" fill="url(#headerGreen)"/>
+
+  <text x="268" y="35" text-anchor="middle" class="header1">ALGORITHM 1</text>
+  <text x="268" y="66" text-anchor="middle" class="header2">INITIAL APPROACH TO CYANOSIS</text>
+
+  <text x="800" y="35" text-anchor="middle" class="header1">ALGORITHM 2</text>
+  <text x="800" y="66" text-anchor="middle" class="header2">EVALUATION OF CENTRAL CYANOSIS</text>
+
+  <text x="1332" y="35" text-anchor="middle" class="header1">ALGORITHM 3</text>
+  <text x="1332" y="66" text-anchor="middle" class="header2">DIFFERENTIATION AND MANAGEMENT</text>
+</g>
+
+<!-- Algorithm 1 -->
+<g class="font">
+  <rect x="20" y="100" width="496" height="42" rx="6" fill="#FFFBEA" stroke="#D8D1A6"/>
+  <text x="268" y="128" text-anchor="middle" class="step">STEP 1: IDENTIFY TYPE</text>
+
+  <rect x="20" y="158" width="228" height="260" rx="6" fill="white" stroke="#7EA18E"/>
+  <rect x="20" y="158" width="228" height="44" rx="6" fill="#00391F"/>
+  <text x="134" y="187" text-anchor="middle" class="boxhead">CENTRAL CYANOSIS</text>
+  <text x="134" y="235" text-anchor="middle" class="body">Lips or tongue blue</text>
+  <text x="134" y="275" text-anchor="middle" class="body">Oxygen saturation</text>
+  <text x="134" y="297" text-anchor="middle" class="body">less than 95%</text>
+  <use href="#icon-lips" x="89" y="330" width="90" height="64" color="#00391F"/>
+
+  <rect x="260" y="158" width="256" height="260" rx="6" fill="white" stroke="#7EA18E"/>
+  <rect x="260" y="158" width="256" height="44" rx="6" fill="#00391F"/>
+  <text x="388" y="187" text-anchor="middle" class="boxhead">PERIPHERAL CYANOSIS</text>
+  <text x="388" y="234" text-anchor="middle" class="body">Hands or feet blue</text>
+  <text x="388" y="256" text-anchor="middle" class="body">Lips or tongue pink</text>
+  <text x="388" y="294" text-anchor="middle" class="body">Oxygen saturation</text>
+  <text x="388" y="316" text-anchor="middle" class="body">greater than or</text>
+  <text x="388" y="338" text-anchor="middle" class="body">equal to 95%</text>
+  <use href="#icon-handfoot" x="328" y="342" width="120" height="70" color="#00391F"/>
+
+  <line x1="260" y1="418" x2="260" y2="450" stroke="#111" stroke-width="2"/>
+  <polygon points="260,462 253,450 267,450" fill="#111"/>
+
+  <rect x="258" y="450" width="258" height="40" rx="6" fill="white" stroke="#A8B8B2"/>
+  <text x="387" y="476" text-anchor="middle" class="body">Warm baby and observe</text>
+
+  <line x1="260" y1="490" x2="260" y2="522" stroke="#111" stroke-width="2"/>
+  <polygon points="260,534 253,522 267,522" fill="#111"/>
+
+  <rect x="20" y="535" width="496" height="42" rx="6" fill="#FFFBEA" stroke="#D8D1A6"/>
+  <text x="268" y="563" text-anchor="middle" class="step">STEP 2: IMMEDIATE ASSESSMENT</text>
+
+  <rect x="20" y="590" width="496" height="105" rx="6" fill="white" stroke="#AABAB4"/>
+  <circle cx="72" cy="642" r="31" fill="url(#greenIcon)"/>
+  <use href="#icon-lungs" x="49" y="619" width="46" height="46" color="white"/>
+  <text x="112" y="623" class="title">STABILISE AIRWAY AND BREATHING</text>
+  <text x="112" y="651" class="bodySmall">• Start oxygen support to achieve target oxygen</text>
+  <text x="126" y="670" class="bodySmall">saturation 90% to 95%</text>
+  <text x="112" y="691" class="bodySmall">• If not responding, consider intubation</text>
+
+  <line x1="268" y1="695" x2="268" y2="728" stroke="#111" stroke-width="2"/>
+  <polygon points="268,740 261,728 275,728" fill="#111"/>
+
+  <rect x="20" y="745" width="496" height="90" rx="6" fill="white" stroke="#AABAB4"/>
+  <circle cx="72" cy="790" r="31" fill="url(#greenIcon)"/>
+  <use href="#icon-drop" x="49" y="767" width="46" height="46" color="white"/>
+  <text x="112" y="779" class="title">CHECK GLUCOSE AND TEMPERATURE</text>
+  <text x="112" y="807" class="bodySmall">• Screen for low blood glucose and treat</text>
+  <text x="112" y="828" class="bodySmall">• Check temperature and keep warm</text>
+
+  <line x1="268" y1="835" x2="268" y2="868" stroke="#111" stroke-width="2"/>
+  <polygon points="268,880 261,868 275,868" fill="#111"/>
+
+  <rect x="20" y="885" width="496" height="95" rx="6" fill="white" stroke="#AABAB4"/>
+  <circle cx="72" cy="932" r="31" fill="url(#greenIcon)"/>
+  <use href="#icon-monitor" x="49" y="909" width="46" height="46" color="white"/>
+  <text x="112" y="920" class="title">MONITOR</text>
+  <text x="112" y="948" class="bodySmall">• Pre- and post-ductal oxygen saturation</text>
+  <text x="112" y="969" class="bodySmall">• Heart rate, respirations and perfusion</text>
+</g>
+
+<!-- Algorithm 2 -->
+<g class="font">
+  <rect x="552" y="100" width="496" height="42" rx="6" fill="#FFFBEA" stroke="#D8D1A6"/>
+  <text x="800" y="128" text-anchor="middle" class="step">STEP 3: CLINICAL ASSESSMENT</text>
+
+  <rect x="552" y="158" width="496" height="170" rx="6" fill="white" stroke="#AABAB4"/>
+  <circle cx="604" cy="213" r="31" fill="url(#greenIcon)"/>
+  <use href="#icon-clipboard" x="581" y="190" width="46" height="46" color="white"/>
+  <text x="652" y="187" class="title">HISTORY</text>
+  <text x="652" y="216" class="bodySmall">• Review antenatal scan for anomalies</text>
+  <text x="652" y="237" class="bodySmall">• Maternal conditions: diabetes, hypertension, infection</text>
+  <text x="652" y="258" class="bodySmall">• Birth history and resuscitation details</text>
+  <text x="652" y="279" class="bodySmall">• Maternal medication and infection risk</text>
+
+  <rect x="552" y="342" width="496" height="200" rx="6" fill="white" stroke="#AABAB4"/>
+  <circle cx="604" cy="397" r="31" fill="url(#greenIcon)"/>
+  <use href="#icon-steth" x="581" y="374" width="46" height="46" color="white"/>
+  <text x="652" y="371" class="title">EXAMINATION</text>
+  <text x="652" y="400" class="bodySmall">• General: dysmorphic features, pallor, jaundice, oedema</text>
+  <text x="652" y="421" class="bodySmall">• Perfusion: capillary refill time, pulses, blood pressure</text>
+  <text x="652" y="442" class="bodySmall">• Cardiac: heart rate, rhythm, murmur</text>
+  <text x="652" y="463" class="bodySmall">• Respiratory: work of breathing, air entry</text>
+  <text x="652" y="484" class="bodySmall">• Neurological: tone, reflexes, seizures</text>
+
+  <rect x="552" y="557" width="496" height="110" rx="6" fill="white" stroke="#AABAB4"/>
+  <circle cx="604" cy="612" r="31" fill="url(#greenIcon)"/>
+  <use href="#icon-ox" x="581" y="589" width="46" height="46" color="white"/>
+  <text x="652" y="590" class="title">PULSE OXIMETRY SCREENING</text>
+  <text x="652" y="619" class="bodySmall">• Measure oxygen saturation in right hand and either foot</text>
+  <text x="652" y="641" class="bodySmall">• Record pre- and post-ductal difference</text>
+
+  <line x1="800" y1="667" x2="800" y2="695" stroke="#111" stroke-width="2"/>
+  <polygon points="800,707 793,695 807,695" fill="#111"/>
+
+  <rect x="552" y="710" width="496" height="120" rx="8" fill="white" stroke="#D90000" stroke-width="2" stroke-dasharray="8 6"/>
+  <text x="800" y="746" text-anchor="middle" class="redTitle">ABNORMAL IF:</text>
+  <text x="800" y="780" text-anchor="middle" class="body">Oxygen saturation less than 95% in air</text>
+  <text x="800" y="806" text-anchor="middle" class="body">OR</text>
+  <text x="800" y="832" text-anchor="middle" class="body">Pre-ductal and post-ductal difference greater than 3%</text>
+
+  <line x1="800" y1="830" x2="800" y2="866" stroke="#111" stroke-width="2"/>
+  <polygon points="800,878 793,866 807,866" fill="#111"/>
+
+  <rect x="552" y="885" width="496" height="42" rx="6" fill="#FFFBEA" stroke="#D8D1A6"/>
+  <text x="800" y="913" text-anchor="middle" class="step">STEP 4: PERFORM HYPEROXIA TEST</text>
+
+  <rect x="552" y="940" width="496" height="55" rx="6" fill="white" stroke="#AABAB4"/>
+  <circle cx="604" cy="968" r="25" fill="url(#greenIcon)"/>
+  <use href="#icon-lungs" x="585" y="949" width="38" height="38" color="white"/>
+  <text x="652" y="965" class="bodySmall">Administer 100% oxygen for 10 minutes and reassess oxygen saturation.</text>
+</g>
+
+<!-- Algorithm 3 -->
+<g class="font">
+  <circle cx="1220" cy="125" r="31" fill="url(#redIcon)"/>
+  <use href="#icon-heart" x="1197" y="102" width="46" height="46" color="white"/>
+  <circle cx="1438" cy="125" r="31" fill="url(#greenIcon)"/>
+  <use href="#icon-lungs" x="1415" y="102" width="46" height="46" color="white"/>
+
+  <rect x="1084" y="168" width="240" height="250" rx="6" fill="white" stroke="#F04B4B"/>
+  <text x="1204" y="198" text-anchor="middle" class="redTitle">CARDIAC CAUSE</text>
+  <text x="1204" y="220" text-anchor="middle" class="redTitle">LIKELY IF:</text>
+  <line x1="1084" y1="232" x2="1324" y2="232" stroke="#F04B4B"/>
+  <text x="1102" y="265" class="bodySmall" fill="#D90000">• Cyanosis persists despite</text>
+  <text x="1117" y="284" class="bodySmall">adequate oxygen</text>
+  <text x="1102" y="313" class="bodySmall">• Weak or absent pulses or</text>
+  <text x="1117" y="332" class="bodySmall">poor perfusion</text>
+  <text x="1102" y="361" class="bodySmall">• Murmur</text>
+  <text x="1102" y="390" class="bodySmall">• Dysmorphic features</text>
+  <text x="1102" y="419" class="bodySmall">• Shock or metabolic acidosis</text>
+
+  <rect x="1336" y="168" width="244" height="250" rx="6" fill="white" stroke="#7EA18E"/>
+  <text x="1458" y="198" text-anchor="middle" class="greenTitle">NON-CARDIAC CAUSE</text>
+  <text x="1458" y="220" text-anchor="middle" class="greenTitle">LIKELY IF:</text>
+  <line x1="1336" y1="232" x2="1580" y2="232" stroke="#7EA18E"/>
+  <text x="1354" y="265" class="bodySmall">• Oxygen saturation improves</text>
+  <text x="1369" y="284" class="bodySmall">with oxygen</text>
+  <text x="1354" y="313" class="bodySmall">• Signs of respiratory distress</text>
+  <text x="1369" y="332" class="bodySmall">or lung disease</text>
+  <text x="1354" y="361" class="bodySmall">• Normal cardiac examination</text>
+  <text x="1354" y="390" class="bodySmall">• No differential cyanosis:</text>
+  <text x="1369" y="409" class="bodySmall">pre-ductal and post-ductal</text>
+  <text x="1369" y="428" class="bodySmall">difference less than 3%</text>
+
+  <rect x="1084" y="432" width="240" height="310" rx="6" fill="white" stroke="#F04B4B"/>
+  <rect x="1084" y="432" width="240" height="44" rx="6" fill="#D90000"/>
+  <text x="1204" y="461" text-anchor="middle" class="boxhead">MANAGEMENT</text>
+
+  <circle cx="1118" cy="512" r="22" fill="url(#redIcon)"/>
+  <use href="#icon-phone" x="1102" y="496" width="32" height="32" color="white"/>
+  <text x="1160" y="500" class="bodySmall">Urgently discuss with</text>
+  <text x="1160" y="519" class="bodySmall">referral centre.</text>
+
+  <circle cx="1118" cy="576" r="22" fill="url(#redIcon)"/>
+  <use href="#icon-syringe" x="1102" y="560" width="32" height="32" color="white"/>
+  <text x="1160" y="560" class="bodySmall">Consider prostaglandin E₁</text>
+  <text x="1160" y="579" class="bodySmall">in discussion with</text>
+  <text x="1160" y="598" class="bodySmall">referral centre.</text>
+
+  <circle cx="1118" cy="650" r="22" fill="url(#redIcon)"/>
+  <use href="#icon-drop" x="1102" y="634" width="32" height="32" color="white"/>
+  <text x="1160" y="637" class="bodySmall">Obtain blood gas. Low</text>
+  <text x="1160" y="656" class="bodySmall">oxygen tension is typical.</text>
+
+  <circle cx="1118" cy="710" r="22" fill="url(#redIcon)"/>
+  <use href="#icon-ambulance" x="1102" y="694" width="32" height="32" color="white"/>
+  <text x="1160" y="696" class="bodySmall">Arrange urgent transfer</text>
+  <text x="1160" y="715" class="bodySmall">to cardiac centre.</text>
+
+  <rect x="1336" y="432" width="244" height="310" rx="6" fill="white" stroke="#7EA18E"/>
+  <rect x="1336" y="432" width="244" height="44" rx="6" fill="#00391F"/>
+  <text x="1458" y="461" text-anchor="middle" class="boxhead">MANAGEMENT</text>
+
+  <circle cx="1370" cy="512" r="22" fill="url(#greenIcon)"/>
+  <use href="#icon-lungs" x="1354" y="496" width="32" height="32" color="white"/>
+  <text x="1412" y="500" class="bodySmall">Provide respiratory</text>
+  <text x="1412" y="519" class="bodySmall">support as required.</text>
+
+  <circle cx="1370" cy="576" r="22" fill="url(#greenIcon)"/>
+  <use href="#icon-shield" x="1354" y="560" width="32" height="32" color="white"/>
+  <text x="1412" y="557" class="bodySmall">Treat underlying cause,</text>
+  <text x="1412" y="576" class="bodySmall">including pneumonia, sepsis,</text>
+  <text x="1412" y="595" class="bodySmall">respiratory distress syndrome</text>
+  <text x="1412" y="614" class="bodySmall">or persistent pulmonary</text>
+  <text x="1412" y="633" class="bodySmall">hypertension.</text>
+
+  <circle cx="1370" cy="672" r="22" fill="url(#greenIcon)"/>
+  <use href="#icon-monitor" x="1354" y="656" width="32" height="32" color="white"/>
+  <text x="1412" y="664" class="bodySmall">Monitor and reassess</text>
+  <text x="1412" y="683" class="bodySmall">frequently.</text>
+
+  <circle cx="1370" cy="728" r="22" fill="url(#greenIcon)"/>
+  <use href="#icon-thermo" x="1354" y="712" width="32" height="32" color="white"/>
+  <text x="1412" y="719" class="bodySmall">Maintain normothermia</text>
+  <text x="1412" y="738" class="bodySmall">and normoglycaemia.</text>
+
+  <rect x="1084" y="755" width="496" height="100" rx="6" fill="#FFFBEA" stroke="#AABAB4"/>
+  <circle cx="1137" cy="805" r="31" fill="url(#greenIcon)"/>
+  <use href="#icon-check" x="1114" y="782" width="46" height="46" color="white"/>
+  <text x="1190" y="793" class="greenTitle">CONTINUE SUPPORTIVE CARE</text>
+  <text x="1190" y="821" class="bodySmall">Maintain target oxygen saturation 90% to 95% using pre-ductal</text>
+  <text x="1190" y="840" class="bodySmall">monitoring. Monitor vital signs, urine output and perfusion.</text>
+</g>
+
+<!-- connecting arrow -->
+<line x1="1048" y1="612" x2="1072" y2="612" stroke="#111" stroke-width="2"/>
+<polygon points="1072,612 1060,605 1060,619" fill="#111"/>
+
+<!-- referral strip -->
+<g class="font">
+  <rect x="8" y="956" width="1584" height="74" rx="6" fill="white" stroke="#F04B4B"/>
+  <polygon points="78,970 35,1018 121,1018" fill="#D90000"/>
+  <text x="78" y="1010" text-anchor="middle" font-family="Arial" font-size="46" font-weight="900" fill="white">!</text>
+
+  <text x="145" y="982" font-family="Arial" font-size="18" font-weight="900" fill="#D90000">
+    URGENT DISCUSSION AND REFERRAL — ESCALATE IF ANY OF THE FOLLOWING:
+  </text>
+
+  <text x="145" y="1008" class="bodySmall">• Persistent</text>
+  <text x="160" y="1025" class="bodySmall">central cyanosis</text>
+
+  <line x1="340" y1="993" x2="340" y2="1025" stroke="#E57D7D"/>
+  <text x="360" y="1008" class="bodySmall">• Pre- and post-ductal</text>
+  <text x="375" y="1025" class="bodySmall">difference greater than 3%</text>
+
+  <line x1="690" y1="993" x2="690" y2="1025" stroke="#E57D7D"/>
+  <text x="710" y="1008" class="bodySmall">• Absent or diminished</text>
+  <text x="725" y="1025" class="bodySmall">femoral pulses</text>
+
+  <line x1="985" y1="993" x2="985" y2="1025" stroke="#E57D7D"/>
+  <text x="1005" y="1008" class="bodySmall">• Pathological</text>
+  <text x="1020" y="1025" class="bodySmall">murmur</text>
+
+  <line x1="1205" y1="993" x2="1205" y2="1025" stroke="#E57D7D"/>
+  <text x="1225" y="1017" class="bodySmall">• Signs of shock</text>
+
+  <line x1="1400" y1="993" x2="1400" y2="1025" stroke="#E57D7D"/>
+  <text x="1420" y="1017" class="bodySmall">• Clinical instability</text>
+
+  <rect x="8" y="1034" width="1584" height="27" rx="5" fill="#E8F3EF" stroke="#8FA99B"/>
+  <text x="800" y="1053" text-anchor="middle" class="footer">
+    Always monitor, document findings, management and discussions. Escalate care early.
+  </text>
+</g>
 
 </svg>
 
-<div class="viewer">
-<div class="poster-wrap" id="posterWrap">
-
-<main class="poster" id="poster">
-
-<section class="columns">
-
-<div class="column">
-  <div class="column-header">
-    <div class="algorithm">ALGORITHM 1</div>
-    <div class="subtitle">INITIAL APPROACH TO CYANOSIS</div>
-  </div>
-
-  <div class="column-body">
-    <div class="step-title">STEP 1: IDENTIFY TYPE</div>
-
-    <div class="two-col">
-      <div class="type-card">
-        <h3>CENTRAL CYANOSIS</h3>
-        <p>Lips or tongue blue</p>
-        <p>Oxygen saturation<br>less than 95%</p>
-        <div class="large-icon"><svg><use href="#icon-lips-solid"></use></svg></div>
-      </div>
-
-      <div class="type-card">
-        <h3>PERIPHERAL CYANOSIS</h3>
-        <p>Hands or feet blue<br>Lips or tongue pink</p>
-        <p>Oxygen saturation<br>greater than or<br>equal to 95%</p>
-        <div class="large-icon"><svg><use href="#icon-hand-foot-solid"></use></svg></div>
-      </div>
-    </div>
-
-    <div class="arrow"></div>
-    <div class="observe-box">Warm baby and observe</div>
-    <div class="arrow"></div>
-
-    <div class="step-title">STEP 2: IMMEDIATE ASSESSMENT</div>
-
-    <div class="action-card">
-      <div class="icon-circle"><svg><use href="#icon-lungs-solid"></use></svg></div>
-      <div>
-        <h4 class="card-title">STABILISE AIRWAY AND BREATHING</h4>
-        <ul>
-          <li>Start oxygen support to achieve target oxygen saturation 90% to 95%</li>
-          <li>If not responding, consider intubation</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="arrow"></div>
-
-    <div class="action-card">
-      <div class="icon-circle"><svg><use href="#icon-droplet-solid"></use></svg></div>
-      <div>
-        <h4 class="card-title">CHECK GLUCOSE AND TEMPERATURE</h4>
-        <ul>
-          <li>Screen for low blood glucose and treat</li>
-          <li>Check temperature and keep warm</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="arrow"></div>
-
-    <div class="action-card">
-      <div class="icon-circle"><svg><use href="#icon-monitor-solid"></use></svg></div>
-      <div>
-        <h4 class="card-title">MONITOR</h4>
-        <ul>
-          <li>Pre- and post-ductal oxygen saturation</li>
-          <li>Heart rate, respirations and perfusion</li>
-          <li>Blood glucose</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="arrow"></div>
-
-    <div class="proceed">
-      Proceed to Evaluation<br>
-      <span>(Algorithm 2)</span>
-    </div>
-  </div>
-</div>
-
-<div class="column">
-  <div class="column-header">
-    <div class="algorithm">ALGORITHM 2</div>
-    <div class="subtitle">EVALUATION OF CENTRAL CYANOSIS</div>
-  </div>
-
-  <div class="column-body">
-    <div class="step-title">STEP 3: CLINICAL ASSESSMENT</div>
-
-    <div class="assessment-card history">
-      <div class="icon-circle"><svg><use href="#icon-clipboard-solid"></use></svg></div>
-      <div>
-        <h4 class="card-title">HISTORY</h4>
-        <ul>
-          <li>Review antenatal scan for anomalies</li>
-          <li>Maternal conditions: diabetes, hypertension, infection</li>
-          <li>Birth history and resuscitation details</li>
-          <li>Maternal medication and infection risk</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="assessment-card exam">
-      <div class="icon-circle"><svg><use href="#icon-stethoscope-solid"></use></svg></div>
-      <div>
-        <h4 class="card-title">EXAMINATION</h4>
-        <ul>
-          <li>General: dysmorphic features, pallor, jaundice, oedema</li>
-          <li>Perfusion: capillary refill time, pulses, blood pressure</li>
-          <li>Cardiac: heart rate, rhythm, murmur</li>
-          <li>Respiratory: work of breathing, air entry</li>
-          <li>Neurological: tone, reflexes, seizures</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="assessment-card oximetry">
-      <div class="icon-circle"><svg><use href="#icon-oximeter-solid"></use></svg></div>
-      <div>
-        <h4 class="card-title">PULSE OXIMETRY SCREENING</h4>
-        <ul>
-          <li>Measure oxygen saturation in right hand and either foot</li>
-          <li>Record pre- and post-ductal difference</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="arrow"></div>
-
-    <div class="abnormal-box">
-      <h3>ABNORMAL IF:</h3>
-      <p>
-        Oxygen saturation less than 95% in air<br>
-        <strong>OR</strong><br>
-        Pre-ductal and post-ductal difference greater than 3%
-      </p>
-    </div>
-
-    <div class="arrow"></div>
-
-    <div class="step-title">STEP 4: PERFORM HYPEROXIA TEST</div>
-
-    <div class="hyperoxia-card">
-      <div class="icon-circle"><svg><use href="#icon-lungs-solid"></use></svg></div>
-      <div>
-        <p>Administer 100% oxygen for 10 minutes and reassess oxygen saturation.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="column">
-  <div class="column-header">
-    <div class="algorithm">ALGORITHM 3</div>
-    <div class="subtitle">DIFFERENTIATION AND MANAGEMENT</div>
-  </div>
-
-  <div class="column-body">
-
-    <div class="top-icons">
-      <div class="top-circle red"><svg><use href="#icon-heart-solid"></use></svg></div>
-      <div class="top-circle green"><svg><use href="#icon-lungs-solid"></use></svg></div>
-    </div>
-
-    <div class="cause-grid">
-      <div class="cause-card red">
-        <h3>CARDIAC CAUSE<br>LIKELY IF:</h3>
-        <ul>
-          <li>Cyanosis persists despite adequate oxygen</li>
-          <li>Weak or absent pulses or poor perfusion</li>
-          <li>Murmur</li>
-          <li>Dysmorphic features</li>
-          <li>Shock or metabolic acidosis</li>
-        </ul>
-      </div>
-
-      <div class="cause-card green">
-        <h3>NON-CARDIAC CAUSE<br>LIKELY IF:</h3>
-        <ul>
-          <li>Oxygen saturation improves with oxygen</li>
-          <li>Signs of respiratory distress or lung disease</li>
-          <li>Normal cardiac examination</li>
-          <li>No differential cyanosis: pre-ductal and post-ductal difference less than 3%</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="management-grid">
-      <div class="management-card red">
-        <div class="management-title">MANAGEMENT</div>
-
-        <div class="management-row">
-          <div class="small-circle red"><svg><use href="#icon-phone-solid"></use></svg></div>
-          <p>Urgently discuss with referral centre.</p>
-        </div>
-
-        <div class="management-row">
-          <div class="small-circle red"><svg><use href="#icon-syringe-solid"></use></svg></div>
-          <p>Consider prostaglandin E<sub>1</sub> in discussion with referral centre.</p>
-        </div>
-
-        <div class="management-row">
-          <div class="small-circle red"><svg><use href="#icon-droplet-solid"></use></svg></div>
-          <p>Obtain blood gas. Low oxygen tension is typical.</p>
-        </div>
-
-        <div class="management-row">
-          <div class="small-circle red"><svg><use href="#icon-ambulance-solid"></use></svg></div>
-          <p>Arrange urgent transfer to cardiac centre.</p>
-        </div>
-      </div>
-
-      <div class="management-card green">
-        <div class="management-title">MANAGEMENT</div>
-
-        <div class="management-row">
-          <div class="small-circle green"><svg><use href="#icon-lungs-solid"></use></svg></div>
-          <p>Provide respiratory support as required.</p>
-        </div>
-
-        <div class="management-row">
-          <div class="small-circle green"><svg><use href="#icon-shield-solid"></use></svg></div>
-          <p>Treat underlying cause, including pneumonia, sepsis, respiratory distress syndrome or persistent pulmonary hypertension.</p>
-        </div>
-
-        <div class="management-row">
-          <div class="small-circle green"><svg><use href="#icon-monitor-solid"></use></svg></div>
-          <p>Monitor and reassess frequently.</p>
-        </div>
-
-        <div class="management-row">
-          <div class="small-circle green"><svg><use href="#icon-thermometer-solid"></use></svg></div>
-          <p>Maintain normothermia and normoglycaemia.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="supportive-care">
-      <div class="icon-circle"><svg><use href="#icon-checklist-solid"></use></svg></div>
-      <div>
-        <h3>CONTINUE SUPPORTIVE CARE</h3>
-        <p>Maintain target oxygen saturation 90% to 95% using pre-ductal monitoring. Monitor vital signs, urine output and perfusion.</p>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-</section>
-
-<div class="bridge-arrow"></div>
-
-<section class="referral-strip">
-  <div class="warning-triangle">!</div>
-  <div>
-    <h3>URGENT DISCUSSION AND REFERRAL — ESCALATE IF ANY OF THE FOLLOWING:</h3>
-    <div class="referral-items">
-      <div class="referral-item">Persistent<br>central cyanosis</div>
-      <div class="referral-item">Pre- and post-ductal<br>difference greater than 3%</div>
-      <div class="referral-item">Absent or diminished<br>femoral pulses</div>
-      <div class="referral-item">Pathological<br>murmur</div>
-      <div class="referral-item">Signs of shock</div>
-      <div class="referral-item">Clinical instability</div>
-    </div>
-  </div>
-</section>
-
-<footer class="footer-strip">
-  <svg><use href="#icon-checklist-solid"></use></svg>
-  Always monitor, document findings, management and discussions. Escalate care early.
-</footer>
-
-</main>
-
-</div>
 </div>
 
 <script>
-function fitPoster() {
-  const wrap = document.getElementById("posterWrap");
-  if (!wrap) return;
+function downloadPNG() {
+  const svg = document.getElementById("poster");
+  const clone = svg.cloneNode(true);
 
-  const designWidth = 1600;
-  const designHeight = 1067;
+  clone.setAttribute("width", "1600");
+  clone.setAttribute("height", "1067");
+  clone.setAttribute("viewBox", "0 0 1600 1067");
 
-  const toolbar = document.querySelector(".toolbar");
-  const toolbarHeight = toolbar ? toolbar.offsetHeight : 0;
+  const serializer = new XMLSerializer();
+  const svgString = serializer.serializeToString(clone);
+  const svgBlob = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
+  const url = URL.createObjectURL(svgBlob);
 
-  const availableWidth = window.innerWidth - 24;
-  const availableHeight = window.innerHeight - toolbarHeight - 24;
+  const image = new Image();
 
-  const scaleByWidth = availableWidth / designWidth;
-  const scaleByHeight = availableHeight / designHeight;
+  image.onload = function () {
+    const scale = 5;
+    const canvas = document.createElement("canvas");
+    canvas.width = 1600 * scale;
+    canvas.height = 1067 * scale;
 
-  const scale = Math.min(1, scaleByWidth, scaleByHeight);
+    const ctx = canvas.getContext("2d");
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
-  wrap.style.transform = "scale(" + scale + ")";
-  wrap.style.width = designWidth + "px";
-  wrap.style.height = (designHeight * scale) + "px";
+    URL.revokeObjectURL(url);
+
+    canvas.toBlob(function (blob) {
+      const link = document.createElement("a");
+      link.download = "cyanosis-newborn-algorithm-8000px.png";
+      link.href = URL.createObjectURL(blob);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }, "image/png");
+  };
+
+  image.onerror = function () {
+    alert("PNG export failed in this browser. Please try Chrome.");
+    URL.revokeObjectURL(url);
+  };
+
+  image.src = url;
 }
-
-async function downloadPosterPNG() {
-  const poster = document.getElementById("poster");
-  const wrap = document.getElementById("posterWrap");
-
-  if (!poster || !wrap) {
-    alert("Poster not found.");
-    return;
-  }
-
-  await document.fonts.ready;
-
-  const oldTransform = wrap.style.transform;
-  const oldHeight = wrap.style.height;
-  const oldBodyOverflow = document.body.style.overflow;
-
-  wrap.style.transform = "scale(1)";
-  wrap.style.height = "1067px";
-  document.body.style.overflow = "visible";
-
-  await new Promise(resolve => setTimeout(resolve, 250));
-
-  const canvas = await html2canvas(poster, {
-    backgroundColor: "#FFFFFF",
-    scale: 5,
-    useCORS: true,
-    allowTaint: true,
-    logging: false,
-    width: 1600,
-    height: 1067,
-    scrollX: 0,
-    scrollY: 0
-  });
-
-  wrap.style.transform = oldTransform;
-  wrap.style.height = oldHeight;
-  document.body.style.overflow = oldBodyOverflow;
-  fitPoster();
-
-  const link = document.createElement("a");
-  link.download = "cyanosis-newborn-algorithm-high-resolution.png";
-  link.href = canvas.toDataURL("image/png");
-  link.click();
-}
-
-window.addEventListener("load", fitPoster);
-window.addEventListener("resize", fitPoster);
-setTimeout(fitPoster, 300);
-setTimeout(fitPoster, 1000);
 </script>
 
 </body>
