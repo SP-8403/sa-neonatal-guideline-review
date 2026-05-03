@@ -39,6 +39,7 @@ body {
   background: #EEF3F0;
   font-family: "Source Sans 3", "Source Sans Pro", Arial, sans-serif;
   color: var(--text);
+  overflow: auto;
 }
 
 .toolbar {
@@ -70,12 +71,16 @@ body {
 }
 
 .viewer {
-  padding: 14px;
+  padding: 14px 14px 140px 14px;
   overflow: auto;
+  min-height: calc(100vh - 52px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .poster-wrap {
-  transform-origin: top left;
+  transform-origin: top center;
 }
 
 .poster {
@@ -174,7 +179,7 @@ body {
   margin: 14px 16px;
   font-size: 17px;
   line-height: 1.28;
-  font-weight: 750;
+  font-weight: 600;
 }
 
 .large-icon {
@@ -188,6 +193,15 @@ body {
 .large-icon svg {
   width: 92px;
   height: 72px;
+}
+
+.peripheral-icon {
+  bottom: 8px;
+}
+
+.peripheral-icon svg {
+  width: 72px;
+  height: 42px;
 }
 
 .arrow {
@@ -222,7 +236,7 @@ body {
   text-align: center;
   padding: 7px 10px;
   font-size: 18px;
-  font-weight: 850;
+  font-weight: 800;
 }
 
 .action-card,
@@ -311,7 +325,7 @@ body {
   color: var(--navy);
   font-size: 21px;
   line-height: 1.05;
-  font-weight: 900;
+  font-weight: 850;
 }
 
 ul {
@@ -323,7 +337,7 @@ li {
   font-size: 16px;
   line-height: 1.22;
   margin: 4px 0;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .proceed {
@@ -362,14 +376,14 @@ li {
   margin: 0;
   font-size: 18px;
   line-height: 1.33;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .hyperoxia-card p {
   margin: 7px 0 0 0;
   font-size: 18px;
   line-height: 1.22;
-  font-weight: 750;
+  font-weight: 600;
 }
 
 .top-icons {
@@ -513,7 +527,7 @@ li {
   margin: 0;
   font-size: 15.6px;
   line-height: 1.16;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .supportive-care {
@@ -539,7 +553,7 @@ li {
   margin: 2px 0 0 0;
   font-size: 17px;
   line-height: 1.18;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .bridge-arrow {
@@ -611,7 +625,7 @@ li {
   padding-left: 13px;
   font-size: 15.7px;
   line-height: 1.05;
-  font-weight: 850;
+  font-weight: 700;
 }
 
 .referral-item:first-child {
@@ -663,11 +677,14 @@ li {
   html,
   body {
     background: white;
+    overflow: visible;
   }
 
   .viewer {
     padding: 0;
     overflow: visible;
+    display: block;
+    min-height: auto;
   }
 
   .poster-wrap {
@@ -816,7 +833,7 @@ li {
         <h3>PERIPHERAL CYANOSIS</h3>
         <p>Hands or feet blue<br>Lips or tongue pink</p>
         <p>Oxygen saturation<br>greater than or<br>equal to 95%</p>
-        <div class="large-icon"><svg><use href="#icon-hand-foot-solid"></use></svg></div>
+        <div class="large-icon peripheral-icon"><svg><use href="#icon-hand-foot-solid"></use></svg></div>
       </div>
     </div>
 
@@ -998,24 +1015,34 @@ li {
           <div class="small-circle red"><svg><use href="#icon-droplet-solid"></use></svg></div>
           <p>Obtain blood gas. Low oxygen tension is typical.</p>
         </div>
+
+        <div class="management-row">
+          <div class="small-circle red"><svg><use href="#icon-ambulance-solid"></use></svg></div>
+          <p>Arrange urgent transfer to cardiac centre.</p>
+        </div>
       </div>
 
       <div class="management-card green">
         <div class="management-title">MANAGEMENT</div>
 
         <div class="management-row">
+          <div class="small-circle green"><svg><use href="#icon-lungs-solid"></use></svg></div>
+          <p>Provide respiratory support as required.</p>
+        </div>
+
+        <div class="management-row">
           <div class="small-circle green"><svg><use href="#icon-shield-solid"></use></svg></div>
-          <p>Continue supplemental oxygen.</p>
+          <p>Treat underlying cause, including pneumonia, sepsis, respiratory distress syndrome or persistent pulmonary hypertension.</p>
         </div>
 
         <div class="management-row">
           <div class="small-circle green"><svg><use href="#icon-monitor-solid"></use></svg></div>
-          <p>Investigate underlying cause based on clinical presentation.</p>
+          <p>Monitor and reassess frequently.</p>
         </div>
 
         <div class="management-row">
           <div class="small-circle green"><svg><use href="#icon-thermometer-solid"></use></svg></div>
-          <p>Supportive care and stabilization.</p>
+          <p>Maintain normothermia and normoglycaemia.</p>
         </div>
       </div>
     </div>
@@ -1023,34 +1050,37 @@ li {
     <div class="supportive-care">
       <div class="icon-circle"><svg><use href="#icon-checklist-solid"></use></svg></div>
       <div>
-        <h4 class="card-title">SUPPORTIVE CARE</h4>
-        <p>Maintain normothermia, manage fluids, and continue monitoring throughout transport and management.</p>
+        <h3>CONTINUE SUPPORTIVE CARE</h3>
+        <p>Maintain target oxygen saturation 90% to 95% using pre-ductal monitoring. Monitor vital signs, urine output and perfusion.</p>
       </div>
     </div>
+
   </div>
 </div>
 
 </section>
 
-<div class="referral-strip">
+<div class="bridge-arrow"></div>
+
+<section class="referral-strip">
   <div class="warning-triangle">!</div>
   <div>
-    <h3>URGENT REFERRAL WHEN:</h3>
+    <h3>URGENT DISCUSSION AND REFERRAL — ESCALATE IF ANY OF THE FOLLOWING:</h3>
     <div class="referral-items">
-      <div class="referral-item">Cardiac cause suspected</div>
-      <div class="referral-item">SpO₂ remains <90% on supplemental oxygen</div>
-      <div class="referral-item">Respiratory distress worsening</div>
+      <div class="referral-item">Persistent<br>central cyanosis</div>
+      <div class="referral-item">Pre- and post-ductal<br>difference greater than 3%</div>
+      <div class="referral-item">Absent or diminished<br>femoral pulses</div>
+      <div class="referral-item">Pathological<br>murmur</div>
       <div class="referral-item">Signs of shock</div>
-      <div class="referral-item">Differential cyanosis (>3%)</div>
-      <div class="referral-item">Metabolic acidosis</div>
+      <div class="referral-item">Clinical instability</div>
     </div>
   </div>
-</div>
+</section>
 
-<div class="footer-strip">
-  <svg><use href="#icon-shield-solid"></use></svg>
-  SA Neonatal Guideline Review - Evaluation and Management of Cyanosis
-</div>
+<footer class="footer-strip">
+  <svg><use href="#icon-checklist-solid"></use></svg>
+  Always monitor, document findings, management and discussions. Escalate care early.
+</footer>
 
 </main>
 
@@ -1058,27 +1088,118 @@ li {
 </div>
 
 <script>
-function downloadPosterPNG() {
-  const poster = document.getElementById('poster');
-  const scale = 2; // 2x scale for high resolution
-  
-  html2canvas(poster, {
-    scale: scale,
-    allowTaint: true,
-    useCORS: true,
-    backgroundColor: '#FFFFFF'
-  }).then(canvas => {
-    const link = document.createElement('a');
-    link.href = canvas.toDataURL('image/png');
-    link.download = 'Cyanosis-Algorithm-A4-' + new Date().getTime() + '.png';
-    link.click();
-  }).catch(err => {
-    console.error('Error generating PNG:', err);
-    alert('Error generating PNG. Please try printing to PDF instead.');
+function fitPoster() {
+  const wrap = document.getElementById("posterWrap");
+  const designWidth = 1600;
+  const designHeight = 1067;
+
+  const toolbar = document.querySelector(".toolbar");
+  const toolbarHeight = toolbar ? toolbar.offsetHeight : 0;
+
+  const availableWidth = window.innerWidth - 28;
+  const availableHeight = window.innerHeight - toolbarHeight - 40;
+
+  const scale = Math.min(
+    1,
+    availableWidth / designWidth,
+    availableHeight / designHeight
+  );
+
+  wrap.style.transform = `scale(${scale})`;
+  wrap.style.width = `${designWidth}px`;
+  wrap.style.height = `${designHeight * scale}px`;
+}
+
+function inlineSvgUseElements(root) {
+  const uses = root.querySelectorAll("svg use");
+
+  uses.forEach(use => {
+    const href = use.getAttribute("href") || use.getAttribute("xlink:href");
+
+    if (!href || !href.startsWith("#")) return;
+
+    const symbol = document.querySelector(href);
+    if (!symbol) return;
+
+    const parentSvg = use.closest("svg");
+    if (!parentSvg) return;
+
+    const viewBox = symbol.getAttribute("viewBox");
+    if (viewBox && !parentSvg.getAttribute("viewBox")) {
+      parentSvg.setAttribute("viewBox", viewBox);
+    }
+
+    const children = Array.from(symbol.children);
+
+    children.forEach(child => {
+      const clonedChild = child.cloneNode(true);
+      parentSvg.insertBefore(clonedChild, use);
+    });
+
+    use.remove();
   });
 }
+
+async function downloadPosterPNG() {
+  const poster = document.getElementById("poster");
+
+  if (!poster) {
+    alert("Poster not found.");
+    return;
+  }
+
+  await document.fonts.ready;
+
+  const clone = poster.cloneNode(true);
+  inlineSvgUseElements(clone);
+
+  const exportContainer = document.createElement("div");
+  exportContainer.style.position = "fixed";
+  exportContainer.style.left = "-10000px";
+  exportContainer.style.top = "0";
+  exportContainer.style.width = "1600px";
+  exportContainer.style.height = "1067px";
+  exportContainer.style.background = "#FFFFFF";
+  exportContainer.style.zIndex = "-1";
+
+  clone.style.transform = "none";
+  clone.style.width = "1600px";
+  clone.style.height = "1067px";
+  clone.style.boxShadow = "none";
+  clone.style.borderRadius = "0";
+
+  exportContainer.appendChild(clone);
+  document.body.appendChild(exportContainer);
+
+  await new Promise(resolve => setTimeout(resolve, 300));
+
+  const canvas = await html2canvas(clone, {
+    backgroundColor: "#FFFFFF",
+    scale: 5,
+    useCORS: true,
+    allowTaint: true,
+    logging: false,
+    width: 1600,
+    height: 1067,
+    scrollX: 0,
+    scrollY: 0
+  });
+
+  document.body.removeChild(exportContainer);
+
+  const link = document.createElement("a");
+  link.download = "cyanosis-newborn-algorithm-high-resolution.png";
+  link.href = canvas.toDataURL("image/png");
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+window.addEventListener("resize", fitPoster);
+window.addEventListener("load", fitPoster);
+setTimeout(fitPoster, 300);
+setTimeout(fitPoster, 1000);
 </script>
 
 </body>
-
 </html>
