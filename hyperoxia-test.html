@@ -17,18 +17,20 @@
   --green-dark: #1F3F31;
   --green-mid: #3F7A5A;
   --green-soft: #E8F3EF;
-  --green-soft-2: #F4FAF7;
+  --green-soft-2: #F5FAF7;
 
   --yellow: #FFF7D6;
   --yellow-border: #E4D58A;
 
-  --amber: #C98518;
+  --amber: #9A6200;
   --amber-soft: #FFF8E8;
+  --amber-soft-2: #FFF1CF;
   --amber-border: #E7C77A;
 
   --red: #B8312F;
-  --red-dark: #9E2725;
+  --red-dark: #8F2322;
   --red-soft: #FFF1F0;
+  --red-soft-2: #FFE4E2;
   --red-border: #E4A09D;
 
   --border: #8FA99B;
@@ -102,6 +104,8 @@ body {
   box-shadow: 0 12px 38px rgba(0,0,0,0.18);
 }
 
+/* HEADER */
+
 .header {
   position: absolute;
   top: 8px;
@@ -131,6 +135,8 @@ body {
   font-size: 21px;
   font-weight: 700;
 }
+
+/* LAYOUT */
 
 .content {
   position: absolute;
@@ -165,17 +171,19 @@ body {
   padding: 14px;
 }
 
+/* GENERAL BOXES */
+
 .info-box {
   border: 1.3px solid #AABAB4;
-  background: #FFFFFF;
+  background: var(--green-soft-2);
   border-radius: 8px;
   padding: 12px;
   margin-bottom: 12px;
 }
 
 .info-box.cream {
-  background: var(--cream);
-  border-color: var(--cream-border);
+  background: var(--yellow);
+  border-color: var(--yellow-border);
 }
 
 .info-box h3 {
@@ -205,6 +213,8 @@ li {
   font-weight: 600;
 }
 
+/* PROCEDURE STEPS */
+
 .step-card {
   display: grid;
   grid-template-columns: 62px 1fr;
@@ -221,7 +231,7 @@ li {
   width: 54px;
   height: 54px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 25%, #0B6C38 0%, #005C2E 48%, #003C21 100%);
+  background: radial-gradient(circle at 35% 25%, #3F7A5A 0%, #2C5440 55%, #1F3F31 100%);
   color: white;
   display: flex;
   align-items: center;
@@ -246,6 +256,8 @@ li {
   font-weight: 600;
 }
 
+/* INTERPRETATION */
+
 .interpret-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -261,19 +273,21 @@ li {
 
 .result-card.green {
   border-color: #7EA18E;
+  background: var(--green-soft-2);
 }
 
 .result-card.amber {
-  border-color: #E1AE42;
+  border-color: var(--amber-border);
+  background: var(--amber-soft);
 }
 
 .result-card.red {
-  border-color: #E45656;
+  border-color: var(--red-border);
+  background: var(--red-soft);
 }
 
 .result-card .result-head {
   padding: 8px 12px;
-  color: #FFFFFF;
   font-size: 19px;
   font-weight: 900;
   line-height: 1.05;
@@ -281,15 +295,19 @@ li {
 }
 
 .result-card.green .result-head {
-  background: linear-gradient(180deg, #076B38 0%, #004222 100%);
+  color: #FFFFFF;
+  background: linear-gradient(180deg, #3F7A5A 0%, #2C5440 100%);
 }
 
 .result-card.amber .result-head {
-  background: linear-gradient(180deg, #F4A000 0%, #C27A00 100%);
+  background: linear-gradient(180deg, #FFF7D6 0%, #F1DEA0 100%);
+  color: #5A3A00;
+  border-bottom: 1.5px solid var(--amber-border);
 }
 
 .result-card.red .result-head {
-  background: linear-gradient(180deg, #E60000 0%, #C70000 100%);
+  background: linear-gradient(180deg, #B8312F 0%, #8F2322 100%);
+  color: #FFFFFF;
 }
 
 .result-card .result-body {
@@ -320,12 +338,14 @@ li {
 }
 
 .red .value-label {
-  color: var(--red);
+  color: var(--red-dark);
 }
 
 .amber .value-label {
-  color: #9A6200;
+  color: var(--amber);
 }
+
+/* SAFETY PANEL */
 
 .callout {
   border: 2px dashed var(--red);
@@ -337,7 +357,7 @@ li {
 
 .callout h3 {
   margin: 0 0 8px 0;
-  color: var(--red);
+  color: var(--red-dark);
   font-size: 22px;
   font-weight: 900;
   line-height: 1.05;
@@ -351,11 +371,16 @@ li {
 }
 
 .side-note {
-  border: 1.5px solid var(--cream-border);
-  background: var(--cream);
+  border: 1.5px solid var(--yellow-border);
+  background: var(--yellow);
   border-radius: 8px;
   padding: 12px;
   margin-bottom: 12px;
+}
+
+.side-note.green {
+  background: var(--green-soft);
+  border-color: #9FBDAE;
 }
 
 .side-note h3 {
@@ -372,13 +397,15 @@ li {
   font-weight: 600;
 }
 
+/* FOOTER */
+
 .footer-strip {
   position: absolute;
   left: 10px;
   right: 10px;
   bottom: 52px;
   height: 34px;
-  background: var(--green-pale);
+  background: var(--green-soft);
   border: 1.2px solid var(--border);
   border-radius: 6px;
   color: #143924;
@@ -395,10 +422,10 @@ li {
   right: 10px;
   bottom: 10px;
   height: 36px;
-  background: #FFFFFF;
-  border: 1.8px solid var(--red);
+  background: var(--red-soft);
+  border: 1.8px solid var(--red-border);
   border-radius: 7px;
-  color: var(--red);
+  color: var(--red-dark);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -412,6 +439,8 @@ li {
   margin-left: 8px;
 }
 
+/* PRINT */
+
 @media print {
   @page {
     size: A4 landscape;
@@ -419,32 +448,43 @@ li {
   }
 
   .toolbar {
-    display: none;
+    display: none !important;
   }
 
   html,
   body {
-    background: white;
-    overflow: visible;
+    width: 297mm;
+    height: 210mm;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+    overflow: hidden !important;
   }
 
   .viewer {
-    padding: 0;
-    overflow: visible;
-    display: block;
-    min-height: auto;
+    width: 297mm;
+    height: 210mm;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    display: block !important;
   }
 
   .poster-wrap {
     transform: none !important;
+    width: 297mm !important;
+    height: 210mm !important;
   }
 
   .poster {
-    width: 297mm;
-    height: 210mm;
-    box-shadow: none;
-    border-radius: 0;
-    border: none;
+    width: 297mm !important;
+    height: 210mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    border: none !important;
+    overflow: hidden !important;
   }
 }
 </style>
@@ -464,7 +504,7 @@ li {
 
 <header class="header">
   <h1>HYPEROXIA TEST IN THE CYANOTIC NEWBORN</h1>
-  <p>Use to support differentiation between cardiac and pulmonary causes of persistent central cyanosis</p>
+  <p>Use with clinical assessment to help differentiate cardiac and pulmonary causes of persistent central cyanosis</p>
 </header>
 
 <section class="content">
@@ -475,7 +515,7 @@ li {
 
       <div class="info-box cream">
         <h3>Purpose</h3>
-        <p>The hyperoxia test assists in differentiating cardiac from pulmonary causes of cyanosis.</p>
+        <p>The hyperoxia test assists in differentiating cardiac from pulmonary causes of persistent central cyanosis.</p>
       </div>
 
       <div class="step-card">
@@ -510,9 +550,9 @@ li {
         </div>
       </div>
 
-      <div class="side-note">
-        <h3>Important</h3>
-        <p>Interpret results with the full clinical assessment, pre- and post-ductal saturations, perfusion, respiratory findings and haemodynamic stability.</p>
+      <div class="side-note green">
+        <h3>Clinical context matters</h3>
+        <p>Interpret the result with the full clinical assessment, including pre- and post-ductal saturations, perfusion, respiratory findings and haemodynamic stability.</p>
       </div>
 
     </div>
@@ -552,7 +592,7 @@ li {
         </div>
 
         <div class="result-card red">
-          <div class="result-head">CYANOTIC CONGENITAL HEART DISEASE<br>Right outflow obstruction / duct-dependent lesion</div>
+          <div class="result-head">CYANOTIC CONGENITAL HEART DISEASE<br>Right ventricular outflow obstruction / duct-dependent pulmonary blood flow</div>
           <div class="result-body">
             <div class="value-row"><div class="value-label">PaO₂</div><div>&lt; 50 mmHg / 6.7 kPa</div></div>
             <div class="value-row"><div class="value-label">SpO₂</div><div>&lt; 85%</div></div>
@@ -579,12 +619,12 @@ li {
 
       <div class="callout">
         <h3>UNSTABLE CYANOTIC NEONATE</h3>
-        <p>Requires urgent referral irrespective of the hyperoxia test result.</p>
+        <p>Requires urgent discussion and referral irrespective of the hyperoxia test result.</p>
       </div>
 
-      <div class="side-note">
+      <div class="side-note green">
         <h3>Discuss urgently if cardiac disease is suspected</h3>
-        <p>Urgently discuss with the referral centre or paediatric cardiology service if the clinical assessment or hyperoxia test suggests cyanotic congenital heart disease or a duct-dependent lesion.</p>
+        <p>Discuss with the referral centre or paediatric cardiology service if clinical assessment or the hyperoxia test suggests cyanotic congenital heart disease or a duct-dependent lesion.</p>
       </div>
 
       <div class="side-note">
