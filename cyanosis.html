@@ -998,34 +998,24 @@ li {
           <div class="small-circle red"><svg><use href="#icon-droplet-solid"></use></svg></div>
           <p>Obtain blood gas. Low oxygen tension is typical.</p>
         </div>
-
-        <div class="management-row">
-          <div class="small-circle red"><svg><use href="#icon-ambulance-solid"></use></svg></div>
-          <p>Arrange urgent transfer to cardiac centre.</p>
-        </div>
       </div>
 
       <div class="management-card green">
         <div class="management-title">MANAGEMENT</div>
 
         <div class="management-row">
-          <div class="small-circle green"><svg><use href="#icon-lungs-solid"></use></svg></div>
-          <p>Provide respiratory support as required.</p>
-        </div>
-
-        <div class="management-row">
           <div class="small-circle green"><svg><use href="#icon-shield-solid"></use></svg></div>
-          <p>Treat underlying cause, including pneumonia, sepsis, respiratory distress syndrome or persistent pulmonary hypertension.</p>
+          <p>Continue supplemental oxygen.</p>
         </div>
 
         <div class="management-row">
           <div class="small-circle green"><svg><use href="#icon-monitor-solid"></use></svg></div>
-          <p>Monitor and reassess frequently.</p>
+          <p>Investigate underlying cause based on clinical presentation.</p>
         </div>
 
         <div class="management-row">
           <div class="small-circle green"><svg><use href="#icon-thermometer-solid"></use></svg></div>
-          <p>Maintain normothermia and normoglycaemia.</p>
+          <p>Supportive care and stabilization.</p>
         </div>
       </div>
     </div>
@@ -1033,37 +1023,34 @@ li {
     <div class="supportive-care">
       <div class="icon-circle"><svg><use href="#icon-checklist-solid"></use></svg></div>
       <div>
-        <h3>CONTINUE SUPPORTIVE CARE</h3>
-        <p>Maintain target oxygen saturation 90% to 95% using pre-ductal monitoring. Monitor vital signs, urine output and perfusion.</p>
+        <h4 class="card-title">SUPPORTIVE CARE</h4>
+        <p>Maintain normothermia, manage fluids, and continue monitoring throughout transport and management.</p>
       </div>
     </div>
-
   </div>
 </div>
 
 </section>
 
-<div class="bridge-arrow"></div>
-
-<section class="referral-strip">
+<div class="referral-strip">
   <div class="warning-triangle">!</div>
   <div>
-    <h3>URGENT DISCUSSION AND REFERRAL — ESCALATE IF ANY OF THE FOLLOWING:</h3>
+    <h3>URGENT REFERRAL WHEN:</h3>
     <div class="referral-items">
-      <div class="referral-item">Persistent<br>central cyanosis</div>
-      <div class="referral-item">Pre- and post-ductal<br>difference greater than 3%</div>
-      <div class="referral-item">Absent or diminished<br>femoral pulses</div>
-      <div class="referral-item">Pathological<br>murmur</div>
+      <div class="referral-item">Cardiac cause suspected</div>
+      <div class="referral-item">SpO₂ remains <90% on supplemental oxygen</div>
+      <div class="referral-item">Respiratory distress worsening</div>
       <div class="referral-item">Signs of shock</div>
-      <div class="referral-item">Clinical instability</div>
+      <div class="referral-item">Differential cyanosis (>3%)</div>
+      <div class="referral-item">Metabolic acidosis</div>
     </div>
   </div>
-</section>
+</div>
 
-<footer class="footer-strip">
-  <svg><use href="#icon-checklist-solid"></use></svg>
-  Always monitor, document findings, management and discussions. Escalate care early.
-</footer>
+<div class="footer-strip">
+  <svg><use href="#icon-shield-solid"></use></svg>
+  SA Neonatal Guideline Review - Evaluation and Management of Cyanosis
+</div>
 
 </main>
 
@@ -1071,44 +1058,27 @@ li {
 </div>
 
 <script>
-function fitPoster() {
-  const wrap = document.getElementById("posterWrap");
-  const designWidth = 1600;
-  const designHeight = 1067;
-  const availableWidth = window.innerWidth - 28;
-  const scale = Math.min(1, availableWidth / designWidth);
-
-  wrap.style.transform = `scale(${scale})`;
-  wrap.style.width = `${designWidth}px`;
-  wrap.style.height = `${designHeight * scale}px`;
-}
-
-async function downloadPosterPNG() {
-  const poster = document.getElementById("poster");
-
-  await document.fonts.ready;
-
-  const canvas = await html2canvas(poster, {
-    backgroundColor: "#FFFFFF",
-    scale: 5,
-    useCORS: true,
+function downloadPosterPNG() {
+  const poster = document.getElementById('poster');
+  const scale = 2; // 2x scale for high resolution
+  
+  html2canvas(poster, {
+    scale: scale,
     allowTaint: true,
-    logging: false,
-    width: poster.offsetWidth,
-    height: poster.offsetHeight,
-    scrollX: 0,
-    scrollY: 0
+    useCORS: true,
+    backgroundColor: '#FFFFFF'
+  }).then(canvas => {
+    const link = document.createElement('a');
+    link.href = canvas.toDataURL('image/png');
+    link.download = 'Cyanosis-Algorithm-A4-' + new Date().getTime() + '.png';
+    link.click();
+  }).catch(err => {
+    console.error('Error generating PNG:', err);
+    alert('Error generating PNG. Please try printing to PDF instead.');
   });
-
-  const link = document.createElement("a");
-  link.download = "cyanosis-newborn-algorithm-high-resolution.png";
-  link.href = canvas.toDataURL("image/png");
-  link.click();
 }
-
-window.addEventListener("resize", fitPoster);
-window.addEventListener("load", fitPoster);
 </script>
 
 </body>
+
 </html>
