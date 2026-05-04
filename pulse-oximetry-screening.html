@@ -20,9 +20,6 @@
   --green-soft: #E8F3EF;
   --green-soft-2: #F5FAF7;
 
-  --yellow: #FFF7D6;
-  --yellow-border: #E4D58A;
-
   --amber: #9A6200;
   --amber-soft: #FFF8E8;
   --amber-border: #E7C77A;
@@ -34,7 +31,6 @@
 
   --border: #8FA99B;
   --text: #071525;
-  --navy: #101329;
   --white: #FFFFFF;
 }
 
@@ -114,8 +110,6 @@ body {
   box-shadow: 0 12px 38px rgba(0,0,0,0.18);
 }
 
-/* HEADER */
-
 .header {
   position: absolute;
   top: 8px;
@@ -145,8 +139,6 @@ body {
   font-size: 22px;
   font-weight: 700;
 }
-
-/* MAIN LAYOUT */
 
 .content {
   position: absolute;
@@ -191,8 +183,6 @@ body {
   gap: 14px;
   align-items: start;
 }
-
-/* LARGE PATH CARDS */
 
 .path-card {
   border-radius: 12px;
@@ -272,12 +262,10 @@ body {
 }
 
 .path-body {
+  display: grid;
+  grid-template-rows: 172px 86px;
+  gap: 14px;
   padding: 16px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  justify-content: flex-start;
 }
 
 .criteria-box {
@@ -285,7 +273,8 @@ body {
   border: 1.4px solid rgba(143, 169, 155, 0.8);
   border-radius: 10px;
   padding: 14px 16px;
-  min-height: 160px;
+  min-height: 0;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -314,7 +303,7 @@ body {
 
 .criteria-text small {
   font-size: 21px;
-  font-weight: 800;
+  font-weight: 400;
 }
 
 .or-text {
@@ -326,11 +315,16 @@ body {
 }
 
 .action-box {
+  height: 86px;
+  min-height: 0;
   border-radius: 10px;
   padding: 14px 16px;
   border: 1.5px solid;
   background: #FFFFFF;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .red .action-box {
@@ -373,8 +367,6 @@ body {
   text-align: center;
 }
 
-/* RETEST COLUMN */
-
 .retest-column {
   display: grid;
   grid-template-rows: auto 34px auto auto;
@@ -382,13 +374,20 @@ body {
 }
 
 .retest-column > .path-card .path-body {
-  padding: 14px;
-  gap: 10px;
+  display: grid;
+  grid-template-rows: 172px 86px;
+  gap: 14px;
+  padding: 16px;
 }
 
 .retest-column > .path-card .criteria-box {
-  min-height: 134px;
-  padding: 12px;
+  min-height: 0;
+  height: 100%;
+}
+
+.retest-column > .path-card .action-box {
+  height: 86px;
+  min-height: 0;
 }
 
 .arrow-down {
@@ -446,6 +445,7 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 12px;
   align-items: start;
+  margin-top: 0;
 }
 
 .small-path {
@@ -501,6 +501,7 @@ body {
 
 .small-body .criteria-text small {
   font-size: 16px;
+  font-weight: 400;
 }
 
 .small-body .action-title {
@@ -514,16 +515,15 @@ body {
 }
 
 .small-body .action-box {
+  height: auto;
   padding: 10px;
 }
-
-/* FOOTER */
 
 .footer-strip {
   position: absolute;
   left: 10px;
   right: 10px;
-  bottom: 34px;
+  bottom: 18px;
   height: 34px;
   background: var(--green-soft);
   border: 1.2px solid var(--border);
@@ -541,14 +541,12 @@ body {
 .imprint {
   position: absolute;
   right: 18px;
-  bottom: 9px;
+  bottom: 4px;
   font-size: 13px;
   font-weight: 700;
   color: rgba(31, 63, 49, 0.45);
   letter-spacing: 0.2px;
 }
-
-/* PRINT FALLBACK */
 
 @media print {
   @page {
@@ -623,7 +621,7 @@ body {
   <section class="measurement-bar">
     <div class="measurement-title">MEASUREMENT 1</div>
     <div class="measurement-text">
-      Measure oxygen saturation in the right hand and either foot at 24 hours of life, or earlier if being discharged, or at presentation.
+      Measure oxygen saturation in the right hand and either foot at 24 hours of life, or earlier if being discharged
     </div>
   </section>
 
@@ -662,15 +660,15 @@ body {
             <div class="criteria-label">Criteria</div>
             <div class="criteria-text">
               SpO₂ 90%–94%<br>
-              <small>in either right hand or foot</small>
+              <small>in either the right hand or foot</small>
               <div class="or-text">OR</div>
-              <small>difference ≥ 4% between right hand and foot</small>
+              <small>Difference &gt; 3% between right hand and foot</small>
             </div>
           </div>
 
           <div class="action-box">
             <div class="action-title">Action: Re-test</div>
-            <div class="action-text">Repeat pulse oximetry in one hour.</div>
+            <div class="action-text">Repeat pulse oximetry in one hour</div>
           </div>
         </div>
       </section>
@@ -680,7 +678,7 @@ body {
       <section class="measurement-two">
         <div class="measurement-two-title">MEASUREMENT 2</div>
         <div class="measurement-two-text">
-          Repeat right-hand and foot oxygen saturation after one hour.
+          Repeat screen after one hour
         </div>
       </section>
 
@@ -693,7 +691,7 @@ body {
               <div class="criteria-label">Criteria</div>
               <div class="criteria-text">
                 SpO₂ 90%–94%<br>
-                <small>or difference ≥ 4%</small>
+                <small><strong>OR</strong> difference ≥ 3%</small>
               </div>
             </div>
             <div class="action-box">
@@ -711,12 +709,12 @@ body {
               <div class="criteria-text">
                 SpO₂ ≥ 95%<br>
                 <small>in right hand and foot</small><br>
-                <small>and difference ≤ 3%</small>
+                <small>AND difference ≤ 3%</small>
               </div>
             </div>
             <div class="action-box">
               <div class="action-title">No further screening</div>
-              <div class="action-text">Provide routine newborn care if well.</div>
+              <div class="action-text">Routine newborn care</div>
             </div>
           </div>
         </div>
@@ -742,7 +740,7 @@ body {
 
         <div class="action-box">
           <div class="action-title">No further screening</div>
-          <div class="action-text">Provide routine newborn care if well.</div>
+          <div class="action-text">Routine newborn care</div>
         </div>
       </div>
     </section>
@@ -752,7 +750,7 @@ body {
 </section>
 
 <div class="footer-strip">
-  Any failed screen requires clinical assessment and escalation through the local referral pathway.
+  Failed screening requires clinical assessment and referral according to local pathways
 </div>
 
 <div class="imprint">National Neonatal Guidelines · South Africa · 2026</div>
@@ -869,7 +867,7 @@ async function renderPosterCanvas() {
 
   const canvas = await html2canvas(clone, {
     backgroundColor: "#FFFFFF",
-    scale: 5,
+    scale: 6,
     useCORS: true,
     allowTaint: true,
     logging: false,
