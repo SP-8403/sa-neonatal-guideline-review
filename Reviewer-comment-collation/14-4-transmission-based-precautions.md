@@ -1,0 +1,14 @@
+# 14.4 Transmission Based Precautions
+
+Comments collated: **2**
+
+These are the actual reviewer comments extracted from the draft document and grouped under this chapter/section for technical review and harmonisation.
+
+| # | Section | Reviewer/source | Theme | Anchor text in draft | Comment |
+|---:|---|---|---|---|---|
+| 1 | 14.4 Transmission Based Precautions | Lebogang Schultz | general technical review | 14.4 Transmission Based Precautions | add who needs to be isolated |
+| 2 | 14.4 Transmission Based Precautions | Lebogang Schultz | general technical review | Ensure all staff are vaccinated. | thisection should move up as well before outbreaks section |
+
+## Work this supports
+
+These comments were collated and reviewed to guide chapter-level technical editing, clinical harmonisation, wording cleanup, formatting decisions, table/figure refinement, and escalation/referral clarity.
