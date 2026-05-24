@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SVT Treatment in Neonates</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<style>
+:root{
+  --green-dark:#2C5440;
+  --green-mid:#2F6A4F;
+  --green-soft:#E8F3EF;
+  --cream:#FFF8E6;
+  --cream-border:#D9BE67;
+  --red:#B84E4E;
+  --red-soft:#FFF3F3;
+  --amber:#9A6A13;
+  --amber-soft:#FFF1CF;
+  --border:#B7C9C0;
+  --text:#1F2F28;
+}
+*{box-sizing:border-box;}
+body{margin:0;padding:24px;background:#F4F7F5;font-family:"Source Sans Pro","Source Sans 3",Arial,sans-serif;color:var(--text);}
+.toolbar{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
+button{background:var(--green-dark);color:white;border:none;border-radius:10px;padding:11px 16px;font-weight:800;font-size:15px;cursor:pointer;}
+.note{color:var(--green-dark);font-weight:800;font-size:16px;}
+.poster{width:2300px;margin:0 auto;background:white;border:1.5px solid var(--border);padding:42px;}
+.header{border:1.5px solid var(--border);border-radius:26px;padding:22px 28px;display:grid;grid-template-columns:16px 1fr auto;gap:24px;align-items:center;margin-bottom:20px;}
+.header-bar{background:var(--green-dark);width:16px;height:104px;border-radius:999px;}
+.header h1{margin:0;font-size:46px;line-height:1.05;color:var(--green-dark);font-weight:900;}
+.header p{margin:8px 0 0;font-size:22px;font-weight:800;color:#4B5A52;}
+.badge{border:2px solid var(--red);border-radius:22px;padding:14px 22px;color:var(--red);font-size:20px;font-weight:900;white-space:nowrap;background:var(--red-soft);}
+.step-band{background:var(--green-dark);color:white;border-radius:18px;text-align:center;padding:14px 24px;font-size:29px;font-weight:900;letter-spacing:.5px;margin:18px 0 20px;}
+.landscape-grid{display:grid;grid-template-columns:1.08fr 0.95fr 1.15fr;gap:22px;align-items:start;}
+.col{display:grid;gap:18px;align-content:start;}
+.box{border:1.5px solid var(--border);border-radius:20px;padding:22px 24px;background:white;}
+.box h2{margin:0 0 12px;color:var(--green-dark);font-size:27px;font-weight:900;letter-spacing:.4px;text-transform:uppercase;}
+.box h3{margin:0 0 8px;color:var(--green-dark);font-size:24px;font-weight:900;text-transform:uppercase;}
+.box p,.box li{font-size:21px;line-height:1.32;}
+.box p{margin:0 0 9px;} ul{margin:0;padding-left:24px;} li{margin-bottom:6px;}
+.cream{background:var(--cream);border-color:var(--cream-border);box-shadow:inset 8px 0 0 rgba(217,190,103,.75);}
+.green{background:var(--green-soft);border-color:var(--green-mid);box-shadow:inset 8px 0 0 var(--green-mid);}
+.red{background:var(--red-soft);border-color:var(--red);box-shadow:inset 8px 0 0 var(--red);}
+.amber{background:var(--amber-soft);border-color:#D4A844;box-shadow:inset 8px 0 0 #D4A844;}
+.red h2,.red h3{color:var(--red);} .amber h2,.amber h3{color:var(--amber);}
+.inner-white{background:white;border:1.5px solid rgba(184,78,78,.35);border-radius:14px;padding:14px 18px 14px 34px;margin-top:12px;}
+.dose-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px;}
+.dose-card{background:white;border:1.5px solid #E4C66E;border-radius:14px;padding:14px 16px;}
+.dose-card h3{margin:0 0 6px;font-size:23px;color:var(--amber);}
+.dose-card p{font-size:21px;margin:0 0 6px;}
+.footer{border:1.5px solid var(--border);border-radius:18px;padding:16px 22px;margin-top:20px;text-align:center;color:var(--green-dark);font-size:22px;line-height:1.25;font-weight:900;}
+[contenteditable="true"]:focus{outline:3px dashed #D9A441;background:#FFFFFF;border-radius:6px;}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <button onclick="downloadPNG()">Download PNG</button>
+  <span class="note">Click any text to edit before downloading.</span>
+</div>
+
+<main class="poster" id="poster">
+  <section class="header">
+    <div class="header-bar"></div>
+    <div>
+      <h1 contenteditable="true">SVT Treatment in Neonates</h1>
+      <p contenteditable="true">Emergency response when supraventricular tachycardia is suspected</p>
+    </div>
+    <div class="badge" contenteditable="true">VERY RAPID / REGULAR / FIXED RATE</div>
+  </section>
+
+  <div class="step-band" contenteditable="true">DETERMINE STABILITY AND TREAT SUSPECTED SVT</div>
+
+  <section class="landscape-grid">
+    <div class="col">
+      <div class="box cream">
+        <h2 contenteditable="true">Suspect SVT</h2>
+        <ul>
+          <li contenteditable="true">Very rapid, regular, fixed heart rate</li>
+          <li contenteditable="true">P waves absent or difficult to see</li>
+          <li contenteditable="true">Usually narrow QRS complex</li>
+          <li contenteditable="true">May be associated with poor feeding, pallor, shock or cardiac failure</li>
+        </ul>
+      </div>
+
+      <div class="box red">
+        <h2 contenteditable="true">If baby unstable</h2>
+        <p contenteditable="true"><strong>Shock, hypotension, altered level of consciousness, respiratory distress, cardiac failure or clinical deterioration</strong></p>
+        <ul>
+          <li contenteditable="true">Stabilise airway, breathing and circulation</li>
+          <li contenteditable="true">Give oxygen and respiratory support as needed</li>
+          <li contenteditable="true">Obtain intravenous (IV) or intraosseous (IO) access</li>
+          <li contenteditable="true">Check glucose and correct hypoglycaemia</li>
+          <li contenteditable="true">If available, obtain ECG rhythm strip or 12-lead ECG</li>
+          <li contenteditable="true">Discuss urgently with referral centre or paediatric cardiology</li>
+        </ul>
+        <div class="inner-white">
+          <ul>
+            <li contenteditable="true"><strong>Do not delay emergency treatment prior to transfer</strong></li>
+            <li contenteditable="true">Perform synchronised cardioversion if the baby remains unstable</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="box red">
+        <h2 contenteditable="true">If cardioversion is required</h2>
+        <ul>
+          <li contenteditable="true">Use synchronised cardioversion</li>
+          <li contenteditable="true">Initial energy: 0.5–1 J/kg</li>
+          <li contenteditable="true">If ineffective, increase to 2 J/kg</li>
+          <li contenteditable="true">Provide sedation or analgesia if possible, but do not delay cardioversion in an unstable baby</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="box green">
+        <h2 contenteditable="true">If baby stable</h2>
+        <p contenteditable="true"><strong>Well perfused, no signs of respiratory distress or cardiac failure</strong></p>
+        <ul>
+          <li contenteditable="true">Continue cardiorespiratory and oxygen saturation monitoring</li>
+          <li contenteditable="true">Obtain a 12-lead ECG if possible</li>
+          <li contenteditable="true">Establish IV or IO access</li>
+          <li contenteditable="true">Consider vagal manoeuvres</li>
+          <li contenteditable="true">Prepare adenosine if SVT persists</li>
+        </ul>
+      </div>
+
+      <div class="box amber">
+        <h2 contenteditable="true">Vagal manoeuvres</h2>
+        <p contenteditable="true"><strong>Stable baby only</strong></p>
+        <ul>
+          <li contenteditable="true">A cold facial stimulus may be considered if appropriate expertise is available, using an ice-cold water-filled glove or wrapped cold pack applied briefly to the face while maintaining airway patency</li>
+          <li contenteditable="true">Do not use ocular pressure, carotid sinus massage or abdominal pressure</li>
+          <li contenteditable="true">Do not delay administation of adenosine if vagal manoeuvres are ineffective or urgent escalation if the baby becomes unstable</li>
+        </ul>
+      </div>
+
+      <div class="box amber">
+        <h2 contenteditable="true">After conversion or failed response</h2>
+        <ul>
+          <li contenteditable="true">Continue monitoring after rhythm conversion</li>
+          <li contenteditable="true">Check glucose, electrolytes, calcium and magnesium</li>
+          <li contenteditable="true">Discuss recurrent, resistant or uncertain rhythm with paediatric cardiology</li>
+          <li contenteditable="true">Arrange admission or transfer according to local referral pathway</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="box amber">
+        <h2 contenteditable="true">Adenosine dosing</h2>
+        <div class="dose-grid">
+          <div class="dose-card">
+            <h3 contenteditable="true">First dose</h3>
+            <p contenteditable="true"><strong>0.1 mg/kg IV or IO</strong></p>
+            <p contenteditable="true">Give as a rapid push followed immediately by a normal saline flush</p>
+          </div>
+          <div class="dose-card">
+            <h3 contenteditable="true">Second dose</h3>
+            <p contenteditable="true"><strong>0.2 mg/kg IV or IO</strong></p>
+            <p contenteditable="true">Repeat if first dose ineffective</p>
+          </div>
+        </div>
+        <ul>
+          <li contenteditable="true">Continuous ECG and cardiorespiratory monitoring</li>
+          <li contenteditable="true">Obtain IV or IO access as close to the central circulation (heart) as possible e.g., antecubital fossa</li>
+          <li contenteditable="true">Administer adenosine rapidly, followed immediately by a rapid saline flush</li>
+          <li contenteditable="true"><strong>Maximum single dose:</strong> 0.3 mg/kg/dose</li>
+          <li contenteditable="true">Adenosine has a short half-life and may be associated with transient facial flushing, bradycardia or asystole (rare)</li>
+          <li contenteditable="true">Ensure resuscitation readiness before administration</li>
+          <li contenteditable="true">Record rhythm response during administration</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer" contenteditable="true">If rhythm diagnosis is uncertain, the baby is unstable, adenosine is ineffective, or broad-complex tachycardia is present, manage as an emergency and obtain urgent specialist input</div>
+</main>
+<script>
+async function downloadPNG(){
+  if(document.activeElement){ document.activeElement.blur(); }
+  const poster=document.getElementById("poster");
+  if(typeof html2canvas==="undefined"){alert("PNG export needs an internet connection to load html2canvas. Open the file in Chrome or upload it to GitHub Pages and try again.");return;}
+  try{
+    const canvas=await html2canvas(poster,{scale:4,backgroundColor:"#ffffff",useCORS:true,allowTaint:true,logging:false,windowWidth:poster.scrollWidth,windowHeight:poster.scrollHeight,onclone:function(clonedDoc){const clonedToolbar=clonedDoc.querySelector(".toolbar");if(clonedToolbar){clonedToolbar.style.display="none";}}});
+    const link=document.createElement("a");
+    link.download="svt-treatment-neonates.png";
+    link.href=canvas.toDataURL("image/png");
+    link.click();
+  }catch(error){console.error(error);alert("PNG export failed. Open the file in Chrome or Edge, or upload it to GitHub Pages and use the Download PNG button there.");}
+}
+</script>
+</body>
+</html>
