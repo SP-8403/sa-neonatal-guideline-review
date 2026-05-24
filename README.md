@@ -21,7 +21,7 @@ The structured technical review of draft guideline chapters is documented here:
 
 - **[View the Review Documentation](reviews/)**
 - **[View the Reviewer Comment Collation](Reviewer-comment-collation/README.md)**
-- - **[View Chapter Review Summaries](chapter-review-summaries/README.md)**
+- **[View Chapter Review Summaries](chapter-review-summaries/README.md)**
 
 The reviewer comment collation contains the actual comments extracted from the draft guideline document, grouped chapter by chapter, with reviewer/source, anchor text and review themes retained where available.
 
