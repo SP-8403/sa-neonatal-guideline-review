@@ -105,7 +105,7 @@ Each chapter is reviewed using the following structured framework:
 
 ---
 
-## Chapter Reviews and Algorithsm 
+## Chapter Reviews and Algorithms 
 
 The following chapter reviews are currently documented:
 
